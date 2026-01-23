@@ -1,0 +1,19 @@
+[versions]
+# App Versions
+versionCode = "24"
+versionName = "2.4"
+
+# SDK Versions
+compileSdk = "36"
+buildTools = "36.1.0"
+minSdk = "26"
+targetSdk = "36"
+
+# Plugins
+agp = "9.0.0"
+kotlin = "2.3.0"
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

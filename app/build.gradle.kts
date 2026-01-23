@@ -1,18 +1,20 @@
+import com.android.build.api.dsl.ApplicationExtension
+import org.gradle.kotlin.dsl.configure
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    
+    alias(libs.plugins.android.application)
 }
-android {
+
+configure<ApplicationExtension> {
     namespace = "com.mohamedzaitoon.linkifyall"
-    compileSdk = 36
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.mohamedzaitoon.linkifyall"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
     }
 
     buildFeatures {
@@ -23,11 +25,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("17"))
-        }
-    }
+
 }
 
 dependencies {
@@ -35,4 +33,6 @@ dependencies {
         "dir" to "libs",
         "include" to listOf("*.jar")
     )))
+
+ 
 }
