@@ -1,12 +1,7 @@
 package com.mohamedzaitoon.linkifyall
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
-import android.widget.Toast
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,78 +9,89 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.math.max
 
 object UpdateChecker {
 
-    // TODO: Update these with your actual GitHub details
+    // بياناتك
     private const val GITHUB_USER = "mohamed-zaitoon"
-    private const val GITHUB_REPO = "LinkifyAll" // Ensure this matches your repo name
-
+    private const val GITHUB_REPO = "LinkifyAll"
     private const val API_URL = "https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/releases/latest"
 
-    fun checkForUpdate(context: Context, isManualCheck: Boolean = false) {
+    // الواجهة
+    interface UpdateListener {
+        fun onUpdateAvailable(version: String, url: String, changes: String)
+        fun onNoUpdate()
+        fun onError(error: String)
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun checkForUpdate(context: Context, listener: UpdateListener) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val url = URL(API_URL)
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connectTimeout = 5000
-                connection.readTimeout = 5000
 
                 if (connection.responseCode == 200) {
-                    val stream = connection.inputStream
-                    val response = stream.bufferedReader().use { it.readText() }
-                    val jsonResponse = JSONObject(response)
+                    val response = connection.inputStream.bufferedReader().use { it.readText() }
+                    val json = JSONObject(response)
 
-                    // Get latest version tag (e.g., "v2.5")
-                    var latestVersion = jsonResponse.optString("tag_name", "")
-                    // Remove 'v' prefix if it exists
-                    latestVersion = latestVersion.replace("v", "", ignoreCase = true)
+                    var latestVersion = json.optString("tag_name", "").replace("v", "", true)
 
-                    // Get current app version
                     val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                    val currentVersion = pInfo.versionName
+                    // ✅ الإصلاح هنا: أضفنا ?: "1.0" لضمان أن النص ليس null
+                    val currentVersion = pInfo.versionName ?: "1.0"
 
-                    // Simple string comparison.
-                    // Note: For complex versioning (1.0.1 vs 1.0.10), use a dedicated comparator.
-                    if (latestVersion.isNotEmpty() && latestVersion != currentVersion) {
-                        val downloadUrl = jsonResponse.optString("html_url", "")
-                        val releaseNotes = jsonResponse.optString("body", "No release notes provided.")
+                    // المقارنة
+                    if (latestVersion.isNotEmpty() && isNewer(currentVersion, latestVersion)) {
+
+                        val assets = json.getJSONArray("assets")
+                        var downloadUrl = ""
+                        for (i in 0 until assets.length()) {
+                            val asset = assets.getJSONObject(i)
+                            if (asset.getString("name").endsWith(".apk")) {
+                                downloadUrl = asset.getString("browser_download_url")
+                                break
+                            }
+                        }
+                        if (downloadUrl.isEmpty()) downloadUrl = json.getString("html_url")
+
+                        val body = json.optString("body", "تحديث جديد متوفر!")
 
                         withContext(Dispatchers.Main) {
-                            showUpdateDialog(context, latestVersion, releaseNotes, downloadUrl)
+                            listener.onUpdateAvailable(latestVersion, downloadUrl, body)
                         }
-                    } else if (isManualCheck) {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(context, "You are using the latest version ($currentVersion)", Toast.LENGTH_SHORT).show()
-                        }
+                    } else {
+                        withContext(Dispatchers.Main) { listener.onNoUpdate() }
                     }
                 } else {
-                    Log.e("UpdateChecker", "Failed to connect: ${connection.responseCode}")
+                    withContext(Dispatchers.Main) { listener.onError("Connection Failed: ${connection.responseCode}") }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                if (isManualCheck) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Failed to check for updates", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                // ✅ إصلاح إضافي: ضمان أن رسالة الخطأ نصية دائماً
+                withContext(Dispatchers.Main) { listener.onError(e.message ?: "Unknown Error") }
             }
         }
     }
 
-    private fun showUpdateDialog(context: Context, newVersion: String, changes: String, url: String) {
-        if (context is Activity && !context.isFinishing) {
-            AlertDialog.Builder(context)
-                .setTitle("New Update Available ($newVersion)")
-                .setMessage("Changelog:\n$changes")
-                .setPositiveButton("Update") { _, _ ->
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    context.startActivity(browserIntent)
-                }
-                .setNegativeButton("Later", null)
-                .setCancelable(true)
-                .show()
+    private fun isNewer(current: String, latest: String): Boolean {
+        try {
+            val currentParts = current.split(".").map { it.toIntOrNull() ?: 0 }
+            val latestParts = latest.split(".").map { it.toIntOrNull() ?: 0 }
+            val length = max(currentParts.size, latestParts.size)
+
+            for (i in 0 until length) {
+                val c = currentParts.getOrElse(i) { 0 }
+                val l = latestParts.getOrElse(i) { 0 }
+
+                if (l > c) return true
+                if (l < c) return false
+            }
+        } catch (e: Exception) {
+            return false
         }
+        return false
     }
 }

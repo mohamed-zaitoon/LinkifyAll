@@ -3,6 +3,7 @@
 versionCode = "25"
 versionName = "2.5"
 coroutines = "1.10.2"
+coreKtx = "1.15.0"
 
 # SDK Versions
 compileSdk = "36"
@@ -17,6 +18,7 @@ kotlin = "2.3.0"
 [libraries]
 # Add this line:
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -6,7 +6,7 @@
     <application
         android:label="LinkifyAll"
         android:hasCode="true"
-
+        android:icon="@mipmap/ic_launcher"
         android:theme="@android:style/Theme.DeviceDefault.Light">
 
         <meta-data

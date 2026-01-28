@@ -34,5 +34,12 @@ dependencies {
         "include" to listOf("*.jar")
     )))
     implementation(libs.kotlinx.coroutines.android)
- 
+    implementation(libs.androidx.core.ktx)
+}
+android {
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
