@@ -1,7 +1,8 @@
 [versions]
 # App Versions
-versionCode = "24"
-versionName = "2.4"
+versionCode = "25"
+versionName = "2.5"
+coroutines = "1.10.2"
 
 # SDK Versions
 compileSdk = "36"
@@ -13,6 +14,9 @@ targetSdk = "36"
 agp = "9.0.0"
 kotlin = "2.3.0"
 
+[libraries]
+# Add this line:
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

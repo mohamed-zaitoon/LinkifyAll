@@ -33,6 +33,6 @@ dependencies {
         "dir" to "libs",
         "include" to listOf("*.jar")
     )))
-
+    implementation(libs.kotlinx.coroutines.android)
  
 }
