@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.widget.TextView
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
+import de.robv.android.xposed.XC_MethodReplacement // لازم تعمل import لدي
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage
@@ -23,8 +24,25 @@ class Hook : IXposedHookLoadPackage {
     )
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
+
+        // 1. الجزء الجديد: تفعيل الحالة داخل تطبيقنا ليصبح Active ✅
+        if (lpparam.packageName == "com.mohamedzaitoon.linkifyall") {
+            XposedHelpers.findAndHookMethod(
+                "com.mohamedzaitoon.linkifyall.MainActivity",
+                lpparam.classLoader,
+                "isModuleActive",
+                object : XC_MethodReplacement() {
+                    override fun replaceHookedMethod(param: MethodHookParam): Any {
+                        return true // إرجاع true ليتحول اللون للأخضر
+                    }
+                }
+            )
+        }
+
+        // تجاهل تطبيقات النظام الحساسة لمنع التعليق
         if (lpparam.packageName == "android" || lpparam.packageName == "com.android.systemui") return
 
+        // 2. كود اللينكات الأساسي (زي ما هو)
         XposedHelpers.findAndHookMethod(
             TextView::class.java,
             "setText",
@@ -37,7 +55,7 @@ class Hook : IXposedHookLoadPackage {
                     try {
                         val originalText = param.args[0] as? CharSequence ?: return
                         if (originalText.isEmpty() || originalText.length > 2000) return
-                        
+
                         val textStr = originalText.toString()
                         if (!textStr.contains(".") && !textStr.contains("http")) return
 
@@ -86,7 +104,7 @@ class Hook : IXposedHookLoadPackage {
 
                                 val layout = tv.layout ?: return
                                 val line = layout.getLineForVertical(y)
-                                
+
                                 if (x < layout.getLineLeft(line) || x > layout.getLineRight(line)) return
 
                                 val off = layout.getOffsetForHorizontal(line, x.toFloat())
@@ -108,25 +126,25 @@ class Hook : IXposedHookLoadPackage {
                             }
                         }
                         else if (action == MotionEvent.ACTION_DOWN) {
-                             val text = tv.text
-                             if (text is Spannable) {
+                            val text = tv.text
+                            if (text is Spannable) {
                                 var x = event.x.toInt(); var y = event.y.toInt()
                                 x -= tv.totalPaddingLeft; y -= tv.totalPaddingTop; x += tv.scrollX; y += tv.scrollY
                                 val layout = tv.layout ?: return
                                 val line = layout.getLineForVertical(y)
                                 val off = layout.getOffsetForHorizontal(line, x.toFloat())
-                                
+
                                 val matcher = urlPattern.matcher(text.toString())
                                 while (matcher.find()) {
                                     if (off >= matcher.start() && off <= matcher.end()) {
                                         tv.parent?.requestDisallowInterceptTouchEvent(true)
-                                        param.setResult(true) 
+                                        param.setResult(true)
                                         return
                                     }
                                 }
-                             }
+                            }
                         }
-                        
+
                     } catch (e: Throwable) {
                         XposedBridge.log(e)
                     }
