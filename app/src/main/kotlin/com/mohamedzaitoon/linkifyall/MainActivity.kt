@@ -24,36 +24,34 @@ class MainActivity : Activity() {
     private val GITHUB_URL = "https://github.com/mohamed-zaitoon/LinkifyAll"
     private val WEBSITE_URL = "https://mohamedzaitoon.com"
 
-    // متغير لحفظ معرف التحميل
     private var downloadId: Long = -1
+    private var downloadFileName: String = "" // لحفظ اسم الملف لاستخدامه في الروت
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // --- Root Layout (خلفية رمادية فاتحة) ---
+        // --- Root Layout ---
         val rootLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setBackgroundColor(Color.parseColor("#F2F4F8")) // رمادي فاتح جداً
+            setBackgroundColor(Color.parseColor("#F2F4F8"))
             setPadding(60, 60, 60, 60)
         }
 
-        // --- Card Container (البطاقة البيضاء) ---
+        // --- Card Container ---
         val cardLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             setPadding(50, 80, 50, 80)
-
-            // رسم الخلفية البيضاء مع زوايا دائرية
             background = GradientDrawable().apply {
                 setColor(Color.WHITE)
                 cornerRadius = 40f
-                setStroke(2, Color.parseColor("#E0E0E0")) // حدود خفيفة
+                setStroke(2, Color.parseColor("#E0E0E0"))
             }
-            elevation = 10f // ظل
+            elevation = 10f
         }
 
-        // 1. العنوان
+        // 1. Title
         val titleView = TextView(this).apply {
             text = "LinkifyAll"
             textSize = 32f
@@ -63,10 +61,10 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(titleView)
 
-        // 2. حالة الموديول (Badge)
+        // 2. Module Status Badge
         val isActive = isModuleActive()
-        val statusBgColor = if (isActive) "#E8F5E9" else "#FFEBEE" // خلفية خفيفة
-        val statusTxtColor = if (isActive) "#2E7D32" else "#C62828" // نص غامق
+        val statusBgColor = if (isActive) "#E8F5E9" else "#FFEBEE"
+        val statusTxtColor = if (isActive) "#2E7D32" else "#C62828"
 
         val statusBadge = TextView(this).apply {
             text = if (isActive) "Active ●" else "Inactive ●"
@@ -75,14 +73,10 @@ class MainActivity : Activity() {
             setTextColor(Color.parseColor(statusTxtColor))
             gravity = Gravity.CENTER
             setPadding(40, 15, 40, 15)
-
-            // خلفية الـ Badge
             background = GradientDrawable().apply {
                 setColor(Color.parseColor(statusBgColor))
                 cornerRadius = 50f
             }
-
-            // هوامش
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -90,7 +84,7 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(statusBadge)
 
-        // 3. رقم الإصدار
+        // 3. Version Info
         val versionInfo = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (e: Exception) { "?" }
         val versionView = TextView(this).apply {
             text = "Version $versionInfo"
@@ -100,28 +94,27 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(versionView)
 
-        // فاصل بسيط
+        // Separator
         cardLayout.addView(View(this).apply {
             layoutParams = LinearLayout.LayoutParams(100, 2).apply { setMargins(0, 40, 0, 40) }
             setBackgroundColor(Color.LTGRAY)
         })
 
-        // 4. زر التحديث
+        // 4. Update Button
         val updateButton = Button(this).apply {
             text = "Checking for updates..."
             setTextColor(Color.WHITE)
             textSize = 16f
             typeface = Typeface.DEFAULT_BOLD
-            isEnabled = false // معطل حتى انتهاء الفحص
-            background = getRoundedButtonDrawable("#BDBDBD") // رمادي مبدئياً
-
+            isEnabled = false
+            background = getRoundedButtonDrawable("#BDBDBD")
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 140
             ).apply { setMargins(20, 10, 20, 30) }
         }
         cardLayout.addView(updateButton)
 
-        // 5. الروابط (GitHub & Website)
+        // 5. Links
         val linksLayout = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -144,7 +137,7 @@ class MainActivity : Activity() {
         createIconLink("🌐", "Website", WEBSITE_URL)
         cardLayout.addView(linksLayout)
 
-        // 6. حقوق المطور
+        // 6. Dev Info
         val devInfo = TextView(this).apply {
             text = "© Mohamed Zaitoon"
             textSize = 12f
@@ -154,15 +147,14 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(devInfo)
 
-        // إضافة الكارد للروت
         rootLayout.addView(cardLayout)
         setContentView(rootLayout)
 
-        // --- منطق التحقق من التحديث ---
+        // --- Update Logic ---
         UpdateChecker.checkForUpdate(this, object : UpdateChecker.UpdateListener {
             override fun onUpdateAvailable(version: String, url: String, changes: String) {
                 updateButton.text = "Download Update ($version)"
-                updateButton.background = getRoundedButtonDrawable("#2196F3") // أزرق
+                updateButton.background = getRoundedButtonDrawable("#2196F3")
                 updateButton.isEnabled = true
                 updateButton.setOnClickListener {
                     startInternalDownload(url, version)
@@ -172,18 +164,18 @@ class MainActivity : Activity() {
 
             override fun onNoUpdate() {
                 updateButton.text = "Latest Version Installed"
-                updateButton.background = getRoundedButtonDrawable("#4CAF50") // أخضر
+                updateButton.background = getRoundedButtonDrawable("#4CAF50")
                 updateButton.isEnabled = false
             }
 
             override fun onError(error: String) {
                 updateButton.text = "Check Failed"
                 updateButton.isEnabled = true
-                updateButton.setOnClickListener { recreate() } // إعادة المحاولة
+                updateButton.setOnClickListener { recreate() }
             }
         })
 
-        // --- تسجيل مستمع لانتهاء التحميل (الحل الصحيح للخطأ) ---
+        // --- Receiver Registration ---
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_EXPORTED)
         } else {
@@ -191,7 +183,6 @@ class MainActivity : Activity() {
         }
     }
 
-    // --- دالة الرسم للأزرار الدائرية ---
     private fun getRoundedButtonDrawable(colorHex: String): GradientDrawable {
         return GradientDrawable().apply {
             setColor(Color.parseColor(colorHex))
@@ -199,26 +190,30 @@ class MainActivity : Activity() {
         }
     }
 
-    // --- منطق التحميل الداخلي ---
     private fun startInternalDownload(url: String, version: String) {
         try {
-            // التحقق من صلاحية التثبيت (أندرويد 8+)
+            // طلب إذن التثبيت العادي كاحتياطي
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if (!packageManager.canRequestPackageInstalls()) {
                     startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
                         data = Uri.parse("package:$packageName")
                     })
-                    Toast.makeText(this, "Please allow installation from this source", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Please allow permissions for fallback installation", Toast.LENGTH_LONG).show()
                     return
                 }
             }
 
-            val fileName = "LinkifyAll_$version.apk"
+            downloadFileName = "LinkifyAll_$version.apk" // حفظ الاسم
+
+            // حذف الملف القديم إن وجد لتجنب مشاكل التسمية
+            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
+            if (file.exists()) file.delete()
+
             val request = DownloadManager.Request(Uri.parse(url))
                 .setTitle("Downloading LinkifyAll $version")
                 .setDescription("Downloading update...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, downloadFileName)
                 .setMimeType("application/vnd.android.package-archive")
 
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
@@ -232,17 +227,52 @@ class MainActivity : Activity() {
         }
     }
 
-    // مستمع لانتهاء التحميل وبدء التثبيت
     private val onDownloadComplete = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (downloadId == id) {
-                installApk(id)
+                handleInstallation(id)
             }
         }
     }
 
-    private fun installApk(downloadId: Long) {
+    private fun handleInstallation(downloadId: Long) {
+        // 1. محاولة التثبيت بالروت أولاً
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
+
+        if (file.exists()) {
+            Toast.makeText(this, "Installing via Root...", Toast.LENGTH_SHORT).show()
+            val success = installWithRoot(file.absolutePath)
+
+            if (success) {
+                return // تم التثبيت بنجاح، لا داعي لإكمال الكود
+            }
+        }
+
+        // 2. إذا فشل الروت، نستخدم الطريقة العادية
+        Toast.makeText(this, "Root install failed, trying standard...", Toast.LENGTH_SHORT).show()
+        installStandard(downloadId)
+    }
+
+    // 🔥 دالة التثبيت بالروت
+    private fun installWithRoot(path: String): Boolean {
+        return try {
+            // الأمر: su -c "pm install -r /path/to/apk"
+            // -r تعني reinstall (تحديث) والحفاظ على البيانات
+            val command = "pm install -r \"$path\""
+            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
+            val exitCode = process.waitFor()
+
+            // إذا كان كود الخروج 0 يعني نجح
+            exitCode == 0
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    // التثبيت العادي (Fallback)
+    private fun installStandard(downloadId: Long) {
         try {
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             val uri = manager.getUriForDownloadedFile(downloadId)
@@ -268,5 +298,5 @@ class MainActivity : Activity() {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch (e: Exception) {}
     }
 
-    private fun isModuleActive(): Boolean = false // Hook will change this
+    private fun isModuleActive(): Boolean = false
 }
