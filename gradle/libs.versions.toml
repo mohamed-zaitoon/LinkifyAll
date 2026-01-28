@@ -1,9 +1,9 @@
 [versions]
 # App Versions
-versionCode = "250"
-versionName = "2.5-alpha"
+versionCode = "251"
+versionName = "2.5"
 coroutines = "1.10.2"
-coreKtx = "1.15.0"
+coreKtx = "1.17.0"
 
 # SDK Versions
 compileSdk = "36"
