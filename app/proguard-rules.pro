@@ -18,4 +18,14 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
+# Keep Xposed entry point
+-keep class com.mohamedzaitoon.linkifyall.** { *; }
+
+# Keep Xposed bridge classes
+-keep class de.robv.android.xposed.** { *; }
+
+# Keep hook methods to allow reflection
+-keepclassmembers class * {
+    public void handleLoadPackage(...);
+}

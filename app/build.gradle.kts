@@ -26,6 +26,25 @@ configure<ApplicationExtension> {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    // Build Types Configuration
+    buildTypes {
+        getByName("release") {
+            // Enable code shrinking and obfuscation (ProGuard/R8)
+            isMinifyEnabled = true
+
+            // Enable resource shrinking to remove unused resources
+            isShrinkResources = true
+
+            // ProGuard rules files (Default Android optimize rules + your local rules)
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+            // Use debug keys for signing (Useful for testing release builds without a keystore)
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
 
 dependencies {
@@ -36,12 +55,4 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.swiperefreshlayout)
-}
-
-android {
-    buildTypes {
-        getByName("release") {
-            signingConfig = signingConfigs.getByName("debug")
-        }
-    }
 }
