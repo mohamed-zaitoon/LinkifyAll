@@ -1,7 +1,7 @@
 [versions]
 # App Versions
-versionCode = "101"
-versionName = "0.1.0-beta"
+versionCode = "102"
+versionName = "0.1.0"
 coroutines = "1.10.2"
 coreKtx = "1.17.0"
 swipeRefresh = "1.2.0"
