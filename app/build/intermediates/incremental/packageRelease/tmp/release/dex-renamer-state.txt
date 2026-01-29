@@ -1,0 +1,4 @@
+#Thu Jan 29 04:51:01 EET 2026
+base.0=/media/mohamedzaitoon/data/LinkifyAll/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

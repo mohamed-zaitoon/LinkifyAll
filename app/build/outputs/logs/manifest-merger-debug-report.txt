@@ -1,0 +1,569 @@
+-- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:42:9-50:20
+	android:grantUriPermissions
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:46:13-47
+	android:authorities
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:44:13-60
+	android:exported
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:45:13-37
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:43:13-62
+manifest
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:1:1-53:12
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:1:1-53:12
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:1:1-53:12
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:1:1-53:12
+MERGED from [androidx.databinding:viewbinding:9.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/036b80a280f5bc75b466cd11b02e5892/transformed/viewbinding-9.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-analytics:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/38e2f9c1a35c568e4e295cf8266306fa/transformed/firebase-analytics-23.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:17:1-46:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/09371ee675e5f315788b1e9b0472b6c7/transformed/play-services-measurement-sdk-23.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:17:1-32:12
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7945e312777a9899f7c1b6e0528f9589/transformed/ads-adservices-java-1.1.0-beta11/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.core:core-ktx:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/05fd6224e4d65324df706bebfa4a21cc/transformed/core-ktx-1.17.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/33ba5517c35adc9fd489ecd7e6f27199/transformed/swiperefreshlayout-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b6d62285ad806cd97124acd9e09d1fb9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3e1a0fffc55b7e6af422e48eb934b7a9/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:17:1-39:12
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:17:1-30:12
+MERGED from [com.google.android.gms:play-services-measurement-base:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bbaeef835076f9994d8af534c6dc09e/transformed/play-services-measurement-base-23.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5870c9fc3c55d80deda36c4d8d8db08f/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:15:1-19:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/400a16e895d6b084f566392028c1266e/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c4ee8ca3c9c8c01cd89c04b21fbcc76b/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.fragment:fragment:1.1.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b26799209e4c625c7539f8b687dbfd50/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2e0171acc2fe1f681ab5a47ac1b059f9/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4fb4480f6cb3fc1d5128c9534efadc42/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/beafac8cb1e1b10b01300251fe5d374d/transformed/activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/127666d5c985dff8ea38cf6245920268/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7b2ef082283a00e9c91052f286fdaa11/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-preferences-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/26eaf07489eecefd29cc0858801d24df/transformed/datastore-preferences-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9332bdd7bdc30ad78f472152a1cf753a/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4cb3b8ef21d2b7956891290d1d31e6b0/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5a294ac70115989c7bc505708f430e36/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/8e55d5a011b2933a4b7cdd7cb6a14bd0/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5bed3dd195e1da4d0dc2aa9badd9f4ca/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bd516de2f19683fcb1c01980bf8ac0e3/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/627c9d0120e8cc621f37998d24834ee4/transformed/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4f6c29f7f35c0547fb3991b745a3cc43/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d169c83f71ae9af7b30b2906af4b9e98/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d7a1691ccba608811ee8475fa09d0502/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.firebase:firebase-components:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/99e3a1e6e35d86b958f5c0eccab2504d/transformed/firebase-components-19.0.0/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bf18d9866de40c978acd3d572f5cda3/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-config-interop:16.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/0b29102b6b64846a0ac1a81b6cb0bb6f/transformed/firebase-config-interop-16.0.1/AndroidManifest.xml:15:1-20:12
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3c111286a2458eecead4fcfcf5321d31/transformed/firebase-encoders-json-18.0.1/AndroidManifest.xml:15:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9a330378effa40e96952bfc818157025/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3098474420aa6fc34640912947568d66/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/f39539d4c1c4d592eea4839f6a1ccabf/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5e83ebbd1db919c084b86bc4f5691fad/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-viewtree:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/71f92f8195f2efbc130a7ef7e28a1f34/transformed/core-viewtree-1.0.0/AndroidManifest.xml:2:1-7:12
+	package
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:2:5-51
+	android:versionCode
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:7:5-8:55
+	tools:ignore
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:8:9-52
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:7:22-80
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:10:5-107
+	android:maxSdkVersion
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:10:79-105
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:10:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:11:5-12:38
+	android:maxSdkVersion
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:12:9-35
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:11:22-77
+application
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:14:5-52:19
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:14:5-52:19
+MERGED from [com.google.firebase:firebase-analytics:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/38e2f9c1a35c568e4e295cf8266306fa/transformed/firebase-analytics-23.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/38e2f9c1a35c568e4e295cf8266306fa/transformed/firebase-analytics-23.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/09371ee675e5f315788b1e9b0472b6c7/transformed/play-services-measurement-sdk-23.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/09371ee675e5f315788b1e9b0472b6c7/transformed/play-services-measurement-sdk-23.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:29:5-30:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:29:5-30:19
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b6d62285ad806cd97124acd9e09d1fb9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b6d62285ad806cd97124acd9e09d1fb9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:29:5-37:19
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:29:5-37:19
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:25:5-36:19
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:25:5-36:19
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:10:5-16:19
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:10:5-16:19
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:25:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:25:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bbaeef835076f9994d8af534c6dc09e/transformed/play-services-measurement-base-23.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bbaeef835076f9994d8af534c6dc09e/transformed/play-services-measurement-base-23.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/400a16e895d6b084f566392028c1266e/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/400a16e895d6b084f566392028c1266e/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c4ee8ca3c9c8c01cd89c04b21fbcc76b/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c4ee8ca3c9c8c01cd89c04b21fbcc76b/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d7a1691ccba608811ee8475fa09d0502/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d7a1691ccba608811ee8475fa09d0502/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:28:18-86
+	android:label
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:15:9-35
+	android:hasCode
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:16:9-31
+	android:icon
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:17:9-43
+	android:theme
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:18:9-77
+meta-data#xposedmodule
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:20:9-22:35
+	android:value
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:22:13-33
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:21:13-40
+meta-data#xposeddescription
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:24:9-26:67
+	android:value
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:26:13-65
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:25:13-45
+meta-data#xposedminversion
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:28:9-30:33
+	android:value
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:30:13-31
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:29:13-44
+activity#com.mohamedzaitoon.linkifyall.MainActivity
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:32:9-40:20
+	android:exported
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:34:13-36
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:33:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:36:13-39:29
+action#android.intent.action.MAIN
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:37:17-69
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:37:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:38:17-77
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:38:27-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:47:13-49:58
+	android:resource
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:49:17-55
+	android:name
+		ADDED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml:48:17-67
+uses-sdk
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:9.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/036b80a280f5bc75b466cd11b02e5892/transformed/viewbinding-9.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:9.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/036b80a280f5bc75b466cd11b02e5892/transformed/viewbinding-9.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/38e2f9c1a35c568e4e295cf8266306fa/transformed/firebase-analytics-23.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/38e2f9c1a35c568e4e295cf8266306fa/transformed/firebase-analytics-23.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/09371ee675e5f315788b1e9b0472b6c7/transformed/play-services-measurement-sdk-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/09371ee675e5f315788b1e9b0472b6c7/transformed/play-services-measurement-sdk-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7945e312777a9899f7c1b6e0528f9589/transformed/ads-adservices-java-1.1.0-beta11/AndroidManifest.xml:5:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7945e312777a9899f7c1b6e0528f9589/transformed/ads-adservices-java-1.1.0-beta11/AndroidManifest.xml:5:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:20:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/05fd6224e4d65324df706bebfa4a21cc/transformed/core-ktx-1.17.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/05fd6224e4d65324df706bebfa4a21cc/transformed/core-ktx-1.17.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/33ba5517c35adc9fd489ecd7e6f27199/transformed/swiperefreshlayout-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/33ba5517c35adc9fd489ecd7e6f27199/transformed/swiperefreshlayout-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b6d62285ad806cd97124acd9e09d1fb9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b6d62285ad806cd97124acd9e09d1fb9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3e1a0fffc55b7e6af422e48eb934b7a9/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3e1a0fffc55b7e6af422e48eb934b7a9/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:19:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bbaeef835076f9994d8af534c6dc09e/transformed/play-services-measurement-base-23.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bbaeef835076f9994d8af534c6dc09e/transformed/play-services-measurement-base-23.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5870c9fc3c55d80deda36c4d8d8db08f/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5870c9fc3c55d80deda36c4d8d8db08f/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/400a16e895d6b084f566392028c1266e/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/400a16e895d6b084f566392028c1266e/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c4ee8ca3c9c8c01cd89c04b21fbcc76b/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c4ee8ca3c9c8c01cd89c04b21fbcc76b/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:18:5-43
+MERGED from [androidx.fragment:fragment:1.1.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b26799209e4c625c7539f8b687dbfd50/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b26799209e4c625c7539f8b687dbfd50/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2e0171acc2fe1f681ab5a47ac1b059f9/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2e0171acc2fe1f681ab5a47ac1b059f9/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4fb4480f6cb3fc1d5128c9534efadc42/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4fb4480f6cb3fc1d5128c9534efadc42/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/beafac8cb1e1b10b01300251fe5d374d/transformed/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/beafac8cb1e1b10b01300251fe5d374d/transformed/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/127666d5c985dff8ea38cf6245920268/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/127666d5c985dff8ea38cf6245920268/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7b2ef082283a00e9c91052f286fdaa11/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/7b2ef082283a00e9c91052f286fdaa11/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-preferences-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/26eaf07489eecefd29cc0858801d24df/transformed/datastore-preferences-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-preferences-core-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/26eaf07489eecefd29cc0858801d24df/transformed/datastore-preferences-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9332bdd7bdc30ad78f472152a1cf753a/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9332bdd7bdc30ad78f472152a1cf753a/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4cb3b8ef21d2b7956891290d1d31e6b0/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.7] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4cb3b8ef21d2b7956891290d1d31e6b0/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5a294ac70115989c7bc505708f430e36/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5a294ac70115989c7bc505708f430e36/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/8e55d5a011b2933a4b7cdd7cb6a14bd0/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/8e55d5a011b2933a4b7cdd7cb6a14bd0/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5bed3dd195e1da4d0dc2aa9badd9f4ca/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5bed3dd195e1da4d0dc2aa9badd9f4ca/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bd516de2f19683fcb1c01980bf8ac0e3/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bd516de2f19683fcb1c01980bf8ac0e3/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/627c9d0120e8cc621f37998d24834ee4/transformed/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/627c9d0120e8cc621f37998d24834ee4/transformed/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4f6c29f7f35c0547fb3991b745a3cc43/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4f6c29f7f35c0547fb3991b745a3cc43/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d169c83f71ae9af7b30b2906af4b9e98/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d169c83f71ae9af7b30b2906af4b9e98/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d7a1691ccba608811ee8475fa09d0502/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/d7a1691ccba608811ee8475fa09d0502/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-components:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/99e3a1e6e35d86b958f5c0eccab2504d/transformed/firebase-components-19.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-components:19.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/99e3a1e6e35d86b958f5c0eccab2504d/transformed/firebase-components-19.0.0/AndroidManifest.xml:18:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bf18d9866de40c978acd3d572f5cda3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/2bf18d9866de40c978acd3d572f5cda3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-config-interop:16.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/0b29102b6b64846a0ac1a81b6cb0bb6f/transformed/firebase-config-interop-16.0.1/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-config-interop:16.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/0b29102b6b64846a0ac1a81b6cb0bb6f/transformed/firebase-config-interop-16.0.1/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3c111286a2458eecead4fcfcf5321d31/transformed/firebase-encoders-json-18.0.1/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3c111286a2458eecead4fcfcf5321d31/transformed/firebase-encoders-json-18.0.1/AndroidManifest.xml:18:5-20:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9a330378effa40e96952bfc818157025/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/9a330378effa40e96952bfc818157025/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3098474420aa6fc34640912947568d66/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/3098474420aa6fc34640912947568d66/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/f39539d4c1c4d592eea4839f6a1ccabf/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/f39539d4c1c4d592eea4839f6a1ccabf/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5e83ebbd1db919c084b86bc4f5691fad/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/5e83ebbd1db919c084b86bc4f5691fad/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/71f92f8195f2efbc130a7ef7e28a1f34/transformed/core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/71f92f8195f2efbc130a7ef7e28a1f34/transformed/core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+	android:targetSdkVersion
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /media/mohamedzaitoon/data/LinkifyAll/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:24:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:22-65
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:30:13-85
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:35:9-38:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:36:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:39:9-43:72
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:41:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:42:13-37
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:43:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/bad660609fa62326ac3dfd01a11d5aa0/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:40:13-87
+uses-permission#com.google.android.gms.permission.AD_ID
+ADDED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:27:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/62446edd0d7f99280bb9f9740ae5528b/transformed/play-services-ads-identifier-18.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:26:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-impl:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/b70779963e4f1ec33dce3ad8506d2e23/transformed/play-services-measurement-impl-23.0.0/AndroidManifest.xml:27:22-76
+uses-library#android.ext.adservices
+ADDED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:23:9-25:40
+	android:required
+		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:25:13-37
+	android:name
+		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/6f51ba7fe8578ad13dfebbcffb7473e1/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:24:13-50
+uses-permission#android.permission.ACCESS_ADSERVICES_ATTRIBUTION
+ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:5-88
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:27:5-88
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:27:5-88
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:22-85
+uses-permission#android.permission.ACCESS_ADSERVICES_AD_ID
+ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:5-82
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:28:5-82
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/12cc8751eb30830514b81adc30865213/transformed/play-services-measurement-sdk-api-23.0.0/AndroidManifest.xml:28:5-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:22-79
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:30:9-36:19
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:26:9-35:19
+MERGED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:26:9-35:19
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:11:9-15:19
+MERGED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:11:9-15:19
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:30:9-38:19
+MERGED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:30:9-38:19
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:32:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:34:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:32:13-43
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:31:13-84
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:33:13-35:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:35:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:23.0.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/c09ca096df4745d347b1424ecbd85174/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:34:17-139
+meta-data#com.google.firebase.components:com.google.firebase.remoteconfig.FirebaseRemoteConfigKtxRegistrar
+ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:29:13-31:85
+	android:value
+		ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:31:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:30:17-128
+meta-data#com.google.firebase.components:com.google.firebase.remoteconfig.RemoteConfigRegistrar
+ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-config:23.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/34fa3ae3b8dcb4ace4c08e9ad60e556b/transformed/firebase-config-23.0.1/AndroidManifest.xml:33:17-117
+meta-data#com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar
+ADDED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-abt:21.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/58646c2d414698f993938118ac7d9982/transformed/firebase-abt-21.1.1/AndroidManifest.xml:13:17-109
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar
+ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:16:17-130
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:19.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/59e13de3e37cd36f20cdbf5a93c025f8/transformed/firebase-installations-19.0.1/AndroidManifest.xml:19:17-127
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:23:9-28:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:25:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:27:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:26:13-43
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:28:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:24:13-77
+meta-data#com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar
+ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:35:13-37:85
+	android:value
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:37:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-common:22.0.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/ebc657c980a665fb69c8c601704a681a/transformed/firebase-common-22.0.1/AndroidManifest.xml:36:17-109
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/af22b16e16eeb40ecfcb2c98a00f50e3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.5.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/905a1980c7f10378fa255bb01790ad06/transformed/play-services-basement-18.5.0/AndroidManifest.xml:22:13-58
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:23:9-81
+permission#com.mohamedzaitoon.linkifyall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:26:22-94
+uses-permission#com.mohamedzaitoon.linkifyall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.17.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/4675475d3a0fe7499fbfe6f6ae5ca435/transformed/core-1.17.0/AndroidManifest.xml:26:22-94
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/55793081b621bf684bc888570a0ebbc2/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/mohamedzaitoon/.sdkman/candidates/gradle/9.3.0/bin/caches/9.3.0/transforms/a98ed87381d6b5dab9b1651249213cef/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92

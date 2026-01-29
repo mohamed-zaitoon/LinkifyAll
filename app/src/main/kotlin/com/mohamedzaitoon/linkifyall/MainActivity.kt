@@ -1,5 +1,6 @@
 package com.mohamedzaitoon.linkifyall
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DownloadManager
@@ -23,11 +24,12 @@ import android.view.View
 import android.widget.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import java.io.File
-
+import com.google.firebase.FirebaseApp // 👈 ضيف دي
 class MainActivity : Activity() {
 
-    private val GITHUB_URL = "https://github.com/mohamed-zaitoon/LinkifyAll"
-    private val WEBSITE_URL = "https://mohamedzaitoon.com"
+    // Default URLs
+    private var currentGithubUrl = ""
+    private var currentWebsiteUrl = ""
 
     private var downloadId: Long = -1
     private var downloadFileName: String = ""
@@ -38,12 +40,16 @@ class MainActivity : Activity() {
     private var dialogPercentText: TextView? = null
     private var isDownloading = false
 
+    // UI References
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var updateButton: Button
+    private lateinit var githubButton: TextView
+    private lateinit var websiteButton: TextView
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        FirebaseApp.initializeApp(this)
         // 1. SwipeRefreshLayout
         swipeRefreshLayout = SwipeRefreshLayout(this).apply {
             setColorSchemeColors(Color.parseColor("#2196F3"))
@@ -136,19 +142,23 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER
             setPadding(0, 40, 0, 0)
         }
-        fun createIconLink(emoji: String, label: String, url: String) {
+
+        fun createIconLink(emoji: String, label: String, initialUrl: String): TextView {
             val tv = TextView(this).apply {
                 text = "$emoji $label"
                 textSize = 14f
                 setTextColor(Color.parseColor("#1976D2"))
                 setPadding(30, 20, 30, 20)
                 gravity = Gravity.CENTER
-                setOnClickListener { openUrl(url) }
+                setOnClickListener { openUrl(initialUrl) }
             }
             linksLayout.addView(tv)
+            return tv
         }
-        createIconLink("🐙", "GitHub", GITHUB_URL)
-        createIconLink("🌐", "Website", WEBSITE_URL)
+
+        githubButton = createIconLink("🐙", "GitHub", currentGithubUrl)
+        websiteButton = createIconLink("🌐", "Website", currentWebsiteUrl)
+
         cardLayout.addView(linksLayout)
 
         val devInfo = TextView(this).apply {
@@ -181,22 +191,31 @@ class MainActivity : Activity() {
             updateButton.isEnabled = false
         }
         UpdateChecker.checkForUpdate(this, object : UpdateChecker.UpdateListener {
-            override fun onUpdateAvailable(version: String, url: String, changes: String) {
+            override fun onConfigFetched(result: UpdateChecker.ConfigResult) {
                 swipeRefreshLayout.isRefreshing = false
-                updateButton.text = "Download Update ($version)"
-                updateButton.background = getRoundedButtonDrawable("#2196F3")
-                updateButton.isEnabled = true
-                updateButton.setOnClickListener {
-                    startInternalDownload(url, version)
+
+                // Update Links
+                currentGithubUrl = result.githubUrl
+                currentWebsiteUrl = result.websiteUrl
+                githubButton.setOnClickListener { openUrl(currentGithubUrl) }
+                websiteButton.setOnClickListener { openUrl(currentWebsiteUrl) }
+
+                // Check update
+                if (result.updateAvailable) {
+                    updateButton.text = "Download Update (${result.latestVersionName})"
+                    updateButton.background = getRoundedButtonDrawable("#2196F3")
+                    updateButton.isEnabled = true
+                    updateButton.setOnClickListener {
+                        startInternalDownload(result.downloadUrl, result.latestVersionName)
+                    }
+                    Toast.makeText(this@MainActivity, "Update Available: ${result.latestVersionName}", Toast.LENGTH_SHORT).show()
+                } else {
+                    updateButton.text = "Latest Version Installed"
+                    updateButton.background = getRoundedButtonDrawable("#4CAF50")
+                    updateButton.isEnabled = false
                 }
-                Toast.makeText(this@MainActivity, "Update Available: $version", Toast.LENGTH_SHORT).show()
             }
-            override fun onNoUpdate() {
-                swipeRefreshLayout.isRefreshing = false
-                updateButton.text = "Latest Version Installed"
-                updateButton.background = getRoundedButtonDrawable("#4CAF50")
-                updateButton.isEnabled = false
-            }
+
             override fun onError(error: String) {
                 swipeRefreshLayout.isRefreshing = false
                 updateButton.text = "Check Failed (Tap to Retry)"
@@ -233,7 +252,6 @@ class MainActivity : Activity() {
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             downloadId = manager.enqueue(request)
 
-            // Start UI Dialog
             showProgressDialog()
             startDownloadWatcher(manager)
 
@@ -243,7 +261,6 @@ class MainActivity : Activity() {
         }
     }
 
-    // --- DIALOG & PROGRESS LOGIC ---
     private fun showProgressDialog() {
         val dialogView = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -317,7 +334,7 @@ class MainActivity : Activity() {
                                     dialogPercentText?.text = "$progress%"
                                 }
                             }
-                            handler.postDelayed(this, 250) // Check every 250ms
+                            handler.postDelayed(this, 250)
                         }
                     }
                 }

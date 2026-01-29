@@ -1,31 +1,34 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
+# --- Basic Settings ---
+# Keep line numbers and source file names (Crucial for debugging crashes)
 -keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
 -renamesourcefileattribute SourceFile
-# Keep Xposed entry point
--keep class com.mohamedzaitoon.linkifyall.** { *; }
 
-# Keep Xposed bridge classes
+# --- Kotlin Settings ---
+# Prevent obfuscation of Kotlin metadata (Essential for Coroutines)
+-keep class kotlin.Metadata { *; }
+-keepattributes RuntimeVisibleAnnotations
+-keepattributes *Annotation*
+
+# --- Xposed Settings (Most Important) ---
+# 1. Keep Xposed library classes
 -keep class de.robv.android.xposed.** { *; }
 
-# Keep hook methods to allow reflection
--keepclassmembers class * {
+# 2. Keep any class implementing IXposedHookLoadPackage
+-keep class * implements de.robv.android.xposed.IXposedHookLoadPackage {
+    public void handleLoadPackage(de.robv.android.xposed.callbacks.XC_LoadPackage$LoadPackageParam);
+}
+
+# 3. Keep all classes in your package (Safe for Xposed modules)
+-keep class com.mohamedzaitoon.linkifyall.** { *; }
+
+# 4. Keep hook methods
+-keepclassmembers class ** {
     public void handleLoadPackage(...);
 }
+
+# --- Additional Settings ---
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+
+# --- Firebase specific (Optional, R8 usually handles this, but safe to add) ---
+-keep class com.google.firebase.** { *; }

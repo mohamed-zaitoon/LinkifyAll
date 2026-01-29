@@ -3,6 +3,8 @@ import org.gradle.kotlin.dsl.configure
 
 plugins {
     alias(libs.plugins.android.application)
+    // 👇 Apply Google Services Plugin
+    alias(libs.plugins.google.services)
 }
 
 configure<ApplicationExtension> {
@@ -35,13 +37,13 @@ configure<ApplicationExtension> {
             // Enable resource shrinking to remove unused resources
             isShrinkResources = true
 
-            // ProGuard rules files (Default Android optimize rules + your local rules)
+            // ProGuard rules files
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
 
-            // Use debug keys for signing (Useful for testing release builds without a keystore)
+            // Use debug keys for signing (For testing)
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -55,4 +57,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.swiperefreshlayout)
+
+    // 👇 Firebase Dependencies (Using BOM for version management)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
+    implementation(libs.firebase.analytics)
 }

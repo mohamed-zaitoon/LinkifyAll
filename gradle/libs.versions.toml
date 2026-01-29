@@ -1,10 +1,13 @@
 [versions]
 # App Versions
-versionCode = "105"
-versionName = "1.0-rc4"
+versionCode = "100"
+versionName = "0.1.0-alpha"
 coroutines = "1.10.2"
 coreKtx = "1.17.0"
-swipeRefresh = "1.2.0" # 👈 أضف هذا السطر
+swipeRefresh = "1.2.0"
+# 👇 Firebase Versions
+googleServices = "4.4.4"
+firebaseBom = "34.8.0"
 
 # SDK Versions
 compileSdk = "36"
@@ -19,10 +22,15 @@ kotlin = "2.3.0"
 [libraries]
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-
-# 👇 أضف هذا السطر لتعريف المكتبة
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefresh" }
+
+# 👇 Firebase Libraries
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-config = { group = "com.google.firebase", name = "firebase-config" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# 👇 Google Services Plugin
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
