@@ -23,7 +23,7 @@
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s; margin-bottom: 40px; border: none;
         }
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 230, 118, 0.3); }
-        .btn-download:disabled { background: #555; cursor: wait; transform: none; box-shadow: none; }
+        .btn-download:disabled { background: #555; cursor: wait; transform: none; box-shadow: none; color: #aaa; }
 
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left; margin-top: 40px; }
         .feature-card { background: var(--surface); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); }
@@ -36,47 +36,59 @@
             var btn = document.getElementById('actionBtn');
             var originalText = btn.innerHTML;
             
-            // تغيير النص لبيان التحميل
-            btn.innerHTML = "🔄 Checking...";
+            // 1. تغيير شكل الزر ليعرف المستخدم أن هناك عملية جارية
+            btn.innerHTML = "⏳ Fetching latest APK...";
             btn.disabled = true;
 
-            // إعدادات المشروع
-            // ⚠️ تأكد ان الـ Package Name هنا مطابق للموجود في AndroidManifest.xml
-            var packageName = "com.mohamedzaitoon.linkifyall"; 
-            var scheme = "linkifyall";
-            var host = "open";
+            // إعدادات المستودع
             var repoOwner = "mohamed-zaitoon";
             var repoName = "LinkifyAll";
             
-            // الرابط الافتراضي (صفحة الريليس) احتياطي لو الـ API فشل
-            var downloadUrl = `https://github.com/${repoOwner}/${repoName}/releases/latest`;
+            // إعدادات التطبيق (للأندرويد)
+            var packageName = "com.mohamedzaitoon.linkifyall"; 
+            var scheme = "linkifyall";
+            var host = "open";
+
+            var directApkUrl = "";
 
             try {
-                // 1. جلب بيانات آخر إصدار من GitHub API
+                // 2. الاتصال بـ GitHub API لجلب رابط الـ APK المباشر
                 const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`);
                 if (response.ok) {
                     const data = await response.json();
-                    // 2. البحث عن ملف ينتهي بـ .apk
+                    // البحث عن أي ملف ينتهي بـ .apk
                     const apkAsset = data.assets.find(asset => asset.name.endsWith('.apk'));
                     if (apkAsset) {
-                        downloadUrl = apkAsset.browser_download_url; // الرابط المباشر للـ APK
+                        directApkUrl = apkAsset.browser_download_url;
                     }
                 }
             } catch (error) {
-                console.error("Error fetching latest release:", error);
+                console.error("Error fetching release:", error);
             }
 
-            // 3. توجيه المستخدم
-            // Android Intent: حاول تفتح التطبيق، لو فشل -> روح لرابط التحميل (APK المباشر)
-            var intent = "intent://" + host + "#Intent;scheme=" + scheme + ";package=" + packageName + ";S.browser_fallback_url=" + downloadUrl + ";end";
-            
-            window.location.href = intent;
+            // لو فشل في جلب الرابط المباشر، للأسف لازم يروح لصفحة الريليس كبديل
+            if (!directApkUrl) {
+                directApkUrl = `https://github.com/${repoOwner}/${repoName}/releases/latest`;
+            }
 
-            // إعادة الزر لحالته الطبيعية بعد ثواني (في حالة العودة للصفحة)
+            // 3. التحقق من نوع الجهاز
+            var isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+                // لو أندرويد: حاول تفتح التطبيق، لو معرفتش -> حمل الـ APK المباشر
+                // S.browser_fallback_url= هنا هو السر، حطينا فيه رابط الـ APK مش رابط الصفحة
+                var intent = "intent://" + host + "#Intent;scheme=" + scheme + ";package=" + packageName + ";S.browser_fallback_url=" + directApkUrl + ";end";
+                window.location.href = intent;
+            } else {
+                // لو كمبيوتر أو آيفون: حمل الملف فوراً
+                window.location.href = directApkUrl;
+            }
+
+            // إعادة الزر لحالته بعد قليل
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-            }, 3000);
+            }, 4000);
         }
     </script>
 </head>
@@ -101,7 +113,7 @@
         </p>
 
         <button id="actionBtn" onclick="openOrDownload()" class="btn-download">
-            🚀 Open or Download APK
+            🚀 Open App / Download APK
         </button>
 
         <div class="features-grid">
