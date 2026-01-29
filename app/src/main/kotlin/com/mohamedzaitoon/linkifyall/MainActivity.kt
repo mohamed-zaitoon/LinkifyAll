@@ -17,6 +17,7 @@ import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import java.io.File
 
 class MainActivity : Activity() {
@@ -25,20 +26,35 @@ class MainActivity : Activity() {
     private val WEBSITE_URL = "https://mohamedzaitoon.com"
 
     private var downloadId: Long = -1
-    private var downloadFileName: String = "" // لحفظ اسم الملف لاستخدامه في الروت
+    private var downloadFileName: String = ""
+
+    // عناصر الواجهة التي نحتاج لتحديثها
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var updateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // --- Root Layout ---
+        // 1. إعداد SwipeRefreshLayout (الحاوية الرئيسية)
+        swipeRefreshLayout = SwipeRefreshLayout(this).apply {
+            setColorSchemeColors(Color.parseColor("#2196F3")) // لون دائرة التحميل
+            setProgressBackgroundColorSchemeColor(Color.WHITE)
+        }
+
+        // 2. إعداد ScrollView (ضروري لعمل السحب بشكل سليم)
+        val scrollView = ScrollView(this).apply {
+            isFillViewport = true // يملأ الشاشة
+            setBackgroundColor(Color.parseColor("#F2F4F8")) // خلفية رمادية
+        }
+
+        // 3. المحتوى الداخلي (Card Layout القديم)
         val rootLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setBackgroundColor(Color.parseColor("#F2F4F8"))
             setPadding(60, 60, 60, 60)
         }
 
-        // --- Card Container ---
+        // --- بناء البطاقة (Card) ---
         val cardLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
@@ -51,7 +67,7 @@ class MainActivity : Activity() {
             elevation = 10f
         }
 
-        // 1. Title
+        // العنوان
         val titleView = TextView(this).apply {
             text = "LinkifyAll"
             textSize = 32f
@@ -61,20 +77,17 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(titleView)
 
-        // 2. Module Status Badge
+        // حالة الموديول
         val isActive = isModuleActive()
-        val statusBgColor = if (isActive) "#E8F5E9" else "#FFEBEE"
-        val statusTxtColor = if (isActive) "#2E7D32" else "#C62828"
-
         val statusBadge = TextView(this).apply {
             text = if (isActive) "Active ●" else "Inactive ●"
             textSize = 14f
             setTypeface(null, Typeface.BOLD)
-            setTextColor(Color.parseColor(statusTxtColor))
+            setTextColor(Color.parseColor(if (isActive) "#2E7D32" else "#C62828"))
             gravity = Gravity.CENTER
             setPadding(40, 15, 40, 15)
             background = GradientDrawable().apply {
-                setColor(Color.parseColor(statusBgColor))
+                setColor(Color.parseColor(if (isActive) "#E8F5E9" else "#FFEBEE"))
                 cornerRadius = 50f
             }
             layoutParams = LinearLayout.LayoutParams(
@@ -84,7 +97,7 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(statusBadge)
 
-        // 3. Version Info
+        // رقم الإصدار
         val versionInfo = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (e: Exception) { "?" }
         val versionView = TextView(this).apply {
             text = "Version $versionInfo"
@@ -94,27 +107,31 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(versionView)
 
-        // Separator
+        // فاصل
         cardLayout.addView(View(this).apply {
             layoutParams = LinearLayout.LayoutParams(100, 2).apply { setMargins(0, 40, 0, 40) }
             setBackgroundColor(Color.LTGRAY)
         })
 
-        // 4. Update Button
-        val updateButton = Button(this).apply {
-            text = "Checking for updates..."
+        // زر التحديث (تعريف المتغير لاستخدامه لاحقاً)
+        updateButton = Button(this).apply {
+            text = "Check for Updates"
             setTextColor(Color.WHITE)
             textSize = 16f
             typeface = Typeface.DEFAULT_BOLD
-            isEnabled = false
-            background = getRoundedButtonDrawable("#BDBDBD")
+            background = getRoundedButtonDrawable("#BDBDBD") // رمادي
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 140
             ).apply { setMargins(20, 10, 20, 30) }
+
+            // عند الضغط، نقوم بالتحديث اليدوي
+            setOnClickListener {
+                checkForUpdates()
+            }
         }
         cardLayout.addView(updateButton)
 
-        // 5. Links
+        // الروابط
         val linksLayout = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -132,12 +149,11 @@ class MainActivity : Activity() {
             }
             linksLayout.addView(tv)
         }
-
         createIconLink("🐙", "GitHub", GITHUB_URL)
         createIconLink("🌐", "Website", WEBSITE_URL)
         cardLayout.addView(linksLayout)
 
-        // 6. Dev Info
+        // حقوق المطور
         val devInfo = TextView(this).apply {
             text = "© Mohamed Zaitoon"
             textSize = 12f
@@ -147,40 +163,75 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(devInfo)
 
-        rootLayout.addView(cardLayout)
-        setContentView(rootLayout)
+        // --- تجميع الهيكل ---
+        rootLayout.addView(cardLayout) // إضافة البطاقة للـ Linear
+        scrollView.addView(rootLayout) // إضافة الـ Linear للـ Scroll
+        swipeRefreshLayout.addView(scrollView) // إضافة الـ Scroll للـ Swipe
 
-        // --- Update Logic ---
-        UpdateChecker.checkForUpdate(this, object : UpdateChecker.UpdateListener {
-            override fun onUpdateAvailable(version: String, url: String, changes: String) {
-                updateButton.text = "Download Update ($version)"
-                updateButton.background = getRoundedButtonDrawable("#2196F3")
-                updateButton.isEnabled = true
-                updateButton.setOnClickListener {
-                    startInternalDownload(url, version)
-                }
-                Toast.makeText(this@MainActivity, "Update Available!", Toast.LENGTH_SHORT).show()
-            }
+        setContentView(swipeRefreshLayout)
 
-            override fun onNoUpdate() {
-                updateButton.text = "Latest Version Installed"
-                updateButton.background = getRoundedButtonDrawable("#4CAF50")
-                updateButton.isEnabled = false
-            }
+        // --- إعداد منطق التحديث ---
 
-            override fun onError(error: String) {
-                updateButton.text = "Check Failed"
-                updateButton.isEnabled = true
-                updateButton.setOnClickListener { recreate() }
-            }
-        })
+        // 1. عند سحب الشاشة
+        swipeRefreshLayout.setOnRefreshListener {
+            checkForUpdates()
+        }
 
-        // --- Receiver Registration ---
+        // 2. فحص تلقائي عند فتح التطبيق
+        checkForUpdates()
+
+        // --- تسجيل Receiver التحميل ---
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_EXPORTED)
         } else {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
+    }
+
+    // --- دالة التحقق من التحديث (منفصلة) ---
+    private fun checkForUpdates() {
+        // تحديث حالة الواجهة لتدل على التحميل
+        if (!swipeRefreshLayout.isRefreshing) {
+            updateButton.text = "Checking..."
+            updateButton.isEnabled = false
+        }
+
+        UpdateChecker.checkForUpdate(this, object : UpdateChecker.UpdateListener {
+            override fun onUpdateAvailable(version: String, url: String, changes: String) {
+                // إيقاف دائرة التحميل
+                swipeRefreshLayout.isRefreshing = false
+
+                updateButton.text = "Download Update ($version)"
+                updateButton.background = getRoundedButtonDrawable("#2196F3") // أزرق
+                updateButton.isEnabled = true
+                updateButton.setOnClickListener {
+                    startInternalDownload(url, version)
+                }
+
+                Toast.makeText(this@MainActivity, "Update Available: $version", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNoUpdate() {
+                swipeRefreshLayout.isRefreshing = false
+
+                updateButton.text = "Latest Version Installed"
+                updateButton.background = getRoundedButtonDrawable("#4CAF50") // أخضر
+                updateButton.isEnabled = false
+            }
+
+            override fun onError(error: String) {
+                swipeRefreshLayout.isRefreshing = false
+
+                updateButton.text = "Check Failed (Tap to Retry)"
+                updateButton.background = getRoundedButtonDrawable("#F44336") // أحمر
+                updateButton.isEnabled = true
+                updateButton.setOnClickListener {
+                    checkForUpdates()
+                }
+                // طباعة الخطأ للمساعدة في الديباج
+                Toast.makeText(this@MainActivity, "Error: $error", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun getRoundedButtonDrawable(colorHex: String): GradientDrawable {
@@ -192,7 +243,6 @@ class MainActivity : Activity() {
 
     private fun startInternalDownload(url: String, version: String) {
         try {
-            // طلب إذن التثبيت العادي كاحتياطي
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if (!packageManager.canRequestPackageInstalls()) {
                     startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
@@ -203,9 +253,7 @@ class MainActivity : Activity() {
                 }
             }
 
-            downloadFileName = "LinkifyAll_$version.apk" // حفظ الاسم
-
-            // حذف الملف القديم إن وجد لتجنب مشاكل التسمية
+            downloadFileName = "LinkifyAll_$version.apk"
             val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
             if (file.exists()) file.delete()
 
@@ -218,7 +266,6 @@ class MainActivity : Activity() {
 
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             downloadId = manager.enqueue(request)
-
             Toast.makeText(this, "Downloading started...", Toast.LENGTH_SHORT).show()
 
         } catch (e: Exception) {
@@ -237,46 +284,30 @@ class MainActivity : Activity() {
     }
 
     private fun handleInstallation(downloadId: Long) {
-        // 1. محاولة التثبيت بالروت أولاً
         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
-
         if (file.exists()) {
             Toast.makeText(this, "Installing via Root...", Toast.LENGTH_SHORT).show()
             val success = installWithRoot(file.absolutePath)
-
-            if (success) {
-                return // تم التثبيت بنجاح، لا داعي لإكمال الكود
-            }
+            if (success) return
         }
-
-        // 2. إذا فشل الروت، نستخدم الطريقة العادية
         Toast.makeText(this, "Root install failed, trying standard...", Toast.LENGTH_SHORT).show()
         installStandard(downloadId)
     }
 
-    // 🔥 دالة التثبيت بالروت
     private fun installWithRoot(path: String): Boolean {
         return try {
-            // الأمر: su -c "pm install -r /path/to/apk"
-            // -r تعني reinstall (تحديث) والحفاظ على البيانات
             val command = "pm install -r \"$path\""
             val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
-            val exitCode = process.waitFor()
-
-            // إذا كان كود الخروج 0 يعني نجح
-            exitCode == 0
+            process.waitFor() == 0
         } catch (e: Exception) {
-            e.printStackTrace()
             false
         }
     }
 
-    // التثبيت العادي (Fallback)
     private fun installStandard(downloadId: Long) {
         try {
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             val uri = manager.getUriForDownloadedFile(downloadId)
-
             if (uri != null) {
                 val installIntent = Intent(Intent.ACTION_VIEW)
                 installIntent.setDataAndType(uri, "application/vnd.android.package-archive")

@@ -1,9 +1,10 @@
 [versions]
 # App Versions
-versionCode = "101"
-versionName = "1.0-beta"
+versionCode = "102"
+versionName = "1.0-rc1"
 coroutines = "1.10.2"
 coreKtx = "1.17.0"
+swipeRefresh = "1.2.0" # 👈 أضف هذا السطر
 
 # SDK Versions
 compileSdk = "36"
@@ -16,9 +17,11 @@ agp = "9.0.0"
 kotlin = "2.3.0"
 
 [libraries]
-# Add this line:
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+
+# 👇 أضف هذا السطر لتعريف المكتبة
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefresh" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

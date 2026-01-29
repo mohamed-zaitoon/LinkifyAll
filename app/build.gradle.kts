@@ -35,7 +35,9 @@ dependencies {
     )))
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.swiperefreshlayout)
 }
+
 android {
     buildTypes {
         getByName("release") {
