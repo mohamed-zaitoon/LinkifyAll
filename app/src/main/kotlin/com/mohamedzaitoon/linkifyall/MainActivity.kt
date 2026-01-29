@@ -1,11 +1,13 @@
 package com.mohamedzaitoon.linkifyall
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -13,6 +15,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.view.Gravity
 import android.view.View
@@ -28,33 +32,38 @@ class MainActivity : Activity() {
     private var downloadId: Long = -1
     private var downloadFileName: String = ""
 
-    // عناصر الواجهة التي نحتاج لتحديثها
+    // Dialog Components
+    private var progressDialog: AlertDialog? = null
+    private var dialogProgressBar: ProgressBar? = null
+    private var dialogPercentText: TextView? = null
+    private var isDownloading = false
+
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var updateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 1. إعداد SwipeRefreshLayout (الحاوية الرئيسية)
+        // 1. SwipeRefreshLayout
         swipeRefreshLayout = SwipeRefreshLayout(this).apply {
-            setColorSchemeColors(Color.parseColor("#2196F3")) // لون دائرة التحميل
+            setColorSchemeColors(Color.parseColor("#2196F3"))
             setProgressBackgroundColorSchemeColor(Color.WHITE)
         }
 
-        // 2. إعداد ScrollView (ضروري لعمل السحب بشكل سليم)
+        // 2. ScrollView
         val scrollView = ScrollView(this).apply {
-            isFillViewport = true // يملأ الشاشة
-            setBackgroundColor(Color.parseColor("#F2F4F8")) // خلفية رمادية
+            isFillViewport = true
+            setBackgroundColor(Color.parseColor("#F2F4F8"))
         }
 
-        // 3. المحتوى الداخلي (Card Layout القديم)
+        // 3. Root Layout
         val rootLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             setPadding(60, 60, 60, 60)
         }
 
-        // --- بناء البطاقة (Card) ---
+        // --- Card UI ---
         val cardLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
@@ -67,7 +76,6 @@ class MainActivity : Activity() {
             elevation = 10f
         }
 
-        // العنوان
         val titleView = TextView(this).apply {
             text = "LinkifyAll"
             textSize = 32f
@@ -77,7 +85,6 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(titleView)
 
-        // حالة الموديول
         val isActive = isModuleActive()
         val statusBadge = TextView(this).apply {
             text = if (isActive) "Active ●" else "Inactive ●"
@@ -97,7 +104,6 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(statusBadge)
 
-        // رقم الإصدار
         val versionInfo = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (e: Exception) { "?" }
         val versionView = TextView(this).apply {
             text = "Version $versionInfo"
@@ -107,37 +113,29 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(versionView)
 
-        // فاصل
         cardLayout.addView(View(this).apply {
             layoutParams = LinearLayout.LayoutParams(100, 2).apply { setMargins(0, 40, 0, 40) }
             setBackgroundColor(Color.LTGRAY)
         })
 
-        // زر التحديث (تعريف المتغير لاستخدامه لاحقاً)
         updateButton = Button(this).apply {
             text = "Check for Updates"
             setTextColor(Color.WHITE)
             textSize = 16f
             typeface = Typeface.DEFAULT_BOLD
-            background = getRoundedButtonDrawable("#BDBDBD") // رمادي
+            background = getRoundedButtonDrawable("#BDBDBD")
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 140
             ).apply { setMargins(20, 10, 20, 30) }
-
-            // عند الضغط، نقوم بالتحديث اليدوي
-            setOnClickListener {
-                checkForUpdates()
-            }
+            setOnClickListener { checkForUpdates() }
         }
         cardLayout.addView(updateButton)
 
-        // الروابط
         val linksLayout = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
             setPadding(0, 40, 0, 0)
         }
-
         fun createIconLink(emoji: String, label: String, url: String) {
             val tv = TextView(this).apply {
                 text = "$emoji $label"
@@ -153,7 +151,6 @@ class MainActivity : Activity() {
         createIconLink("🌐", "Website", WEBSITE_URL)
         cardLayout.addView(linksLayout)
 
-        // حقوق المطور
         val devInfo = TextView(this).apply {
             text = "© Mohamed Zaitoon"
             textSize = 12f
@@ -163,24 +160,14 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(devInfo)
 
-        // --- تجميع الهيكل ---
-        rootLayout.addView(cardLayout) // إضافة البطاقة للـ Linear
-        scrollView.addView(rootLayout) // إضافة الـ Linear للـ Scroll
-        swipeRefreshLayout.addView(scrollView) // إضافة الـ Scroll للـ Swipe
-
+        rootLayout.addView(cardLayout)
+        scrollView.addView(rootLayout)
+        swipeRefreshLayout.addView(scrollView)
         setContentView(swipeRefreshLayout)
 
-        // --- إعداد منطق التحديث ---
-
-        // 1. عند سحب الشاشة
-        swipeRefreshLayout.setOnRefreshListener {
-            checkForUpdates()
-        }
-
-        // 2. فحص تلقائي عند فتح التطبيق
+        swipeRefreshLayout.setOnRefreshListener { checkForUpdates() }
         checkForUpdates()
 
-        // --- تسجيل Receiver التحميل ---
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_EXPORTED)
         } else {
@@ -188,57 +175,37 @@ class MainActivity : Activity() {
         }
     }
 
-    // --- دالة التحقق من التحديث (منفصلة) ---
     private fun checkForUpdates() {
-        // تحديث حالة الواجهة لتدل على التحميل
         if (!swipeRefreshLayout.isRefreshing) {
             updateButton.text = "Checking..."
             updateButton.isEnabled = false
         }
-
         UpdateChecker.checkForUpdate(this, object : UpdateChecker.UpdateListener {
             override fun onUpdateAvailable(version: String, url: String, changes: String) {
-                // إيقاف دائرة التحميل
                 swipeRefreshLayout.isRefreshing = false
-
                 updateButton.text = "Download Update ($version)"
-                updateButton.background = getRoundedButtonDrawable("#2196F3") // أزرق
+                updateButton.background = getRoundedButtonDrawable("#2196F3")
                 updateButton.isEnabled = true
                 updateButton.setOnClickListener {
                     startInternalDownload(url, version)
                 }
-
                 Toast.makeText(this@MainActivity, "Update Available: $version", Toast.LENGTH_SHORT).show()
             }
-
             override fun onNoUpdate() {
                 swipeRefreshLayout.isRefreshing = false
-
                 updateButton.text = "Latest Version Installed"
-                updateButton.background = getRoundedButtonDrawable("#4CAF50") // أخضر
+                updateButton.background = getRoundedButtonDrawable("#4CAF50")
                 updateButton.isEnabled = false
             }
-
             override fun onError(error: String) {
                 swipeRefreshLayout.isRefreshing = false
-
                 updateButton.text = "Check Failed (Tap to Retry)"
-                updateButton.background = getRoundedButtonDrawable("#F44336") // أحمر
+                updateButton.background = getRoundedButtonDrawable("#F44336")
                 updateButton.isEnabled = true
-                updateButton.setOnClickListener {
-                    checkForUpdates()
-                }
-                // طباعة الخطأ للمساعدة في الديباج
+                updateButton.setOnClickListener { checkForUpdates() }
                 Toast.makeText(this@MainActivity, "Error: $error", Toast.LENGTH_LONG).show()
             }
         })
-    }
-
-    private fun getRoundedButtonDrawable(colorHex: String): GradientDrawable {
-        return GradientDrawable().apply {
-            setColor(Color.parseColor(colorHex))
-            cornerRadius = 30f
-        }
     }
 
     private fun startInternalDownload(url: String, version: String) {
@@ -252,7 +219,6 @@ class MainActivity : Activity() {
                     return
                 }
             }
-
             downloadFileName = "LinkifyAll_$version.apk"
             val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
             if (file.exists()) file.delete()
@@ -266,7 +232,10 @@ class MainActivity : Activity() {
 
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             downloadId = manager.enqueue(request)
-            Toast.makeText(this, "Downloading started...", Toast.LENGTH_SHORT).show()
+
+            // Start UI Dialog
+            showProgressDialog()
+            startDownloadWatcher(manager)
 
         } catch (e: Exception) {
             Toast.makeText(this, "Download Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -274,10 +243,103 @@ class MainActivity : Activity() {
         }
     }
 
+    // --- DIALOG & PROGRESS LOGIC ---
+    private fun showProgressDialog() {
+        val dialogView = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(50, 50, 50, 50)
+            gravity = Gravity.CENTER
+        }
+
+        val title = TextView(this).apply {
+            text = "Downloading..."
+            textSize = 18f
+            typeface = Typeface.DEFAULT_BOLD
+            gravity = Gravity.CENTER
+            setPadding(0, 0, 0, 30)
+        }
+        dialogView.addView(title)
+
+        dialogProgressBar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply {
+            isIndeterminate = false
+            max = 100
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        }
+        dialogView.addView(dialogProgressBar)
+
+        dialogPercentText = TextView(this).apply {
+            text = "0%"
+            gravity = Gravity.CENTER
+            setPadding(0, 20, 0, 0)
+        }
+        dialogView.addView(dialogPercentText)
+
+        progressDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        progressDialog?.show()
+    }
+
+    private fun startDownloadWatcher(manager: DownloadManager) {
+        isDownloading = true
+        val handler = Handler(Looper.getMainLooper())
+
+        val runnable = object : Runnable {
+            override fun run() {
+                if (!isDownloading) return
+
+                val query = DownloadManager.Query().setFilterById(downloadId)
+                val cursor: Cursor = manager.query(query)
+
+                if (cursor.moveToFirst()) {
+                    val statusCol = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
+                    if (statusCol > -1) {
+                        val status = cursor.getInt(statusCol)
+                        if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                            isDownloading = false
+                            progressDialog?.dismiss()
+                            // Receiver will handle install
+                        } else if (status == DownloadManager.STATUS_FAILED) {
+                            isDownloading = false
+                            progressDialog?.dismiss()
+                            Toast.makeText(this@MainActivity, "Download Failed", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val bytesCol = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)
+                            val totalCol = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES)
+                            if (bytesCol > -1 && totalCol > -1) {
+                                val current = cursor.getInt(bytesCol)
+                                val total = cursor.getInt(totalCol)
+                                if (total > 0) {
+                                    val progress = ((current * 100L) / total).toInt()
+                                    dialogProgressBar?.progress = progress
+                                    dialogPercentText?.text = "$progress%"
+                                }
+                            }
+                            handler.postDelayed(this, 250) // Check every 250ms
+                        }
+                    }
+                }
+                cursor.close()
+            }
+        }
+        handler.post(runnable)
+    }
+
+    private fun getRoundedButtonDrawable(colorHex: String): GradientDrawable {
+        return GradientDrawable().apply {
+            setColor(Color.parseColor(colorHex))
+            cornerRadius = 30f
+        }
+    }
+
     private val onDownloadComplete = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (downloadId == id) {
+                isDownloading = false
+                progressDialog?.dismiss()
                 handleInstallation(id)
             }
         }
@@ -290,7 +352,6 @@ class MainActivity : Activity() {
             val success = installWithRoot(file.absolutePath)
             if (success) return
         }
-        Toast.makeText(this, "Root install failed, trying standard...", Toast.LENGTH_SHORT).show()
         installStandard(downloadId)
     }
 
@@ -322,6 +383,7 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        isDownloading = false
         try { unregisterReceiver(onDownloadComplete) } catch (e: Exception) {}
     }
 

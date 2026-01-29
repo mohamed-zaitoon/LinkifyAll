@@ -16,7 +16,7 @@ object UpdateChecker {
     private const val GITHUB_USER = "mohamed-zaitoon"
     private const val GITHUB_REPO = "LinkifyAll"
 
-    // ✅ API URL: Get the single most recent release (chronologically), regardless of status (beta/stable)
+    // ✅ API URL: Get the single most recent release (chronologically)
     private const val API_URL = "https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/releases?per_page=1"
 
     interface UpdateListener {
@@ -34,22 +34,21 @@ object UpdateChecker {
                 connection.requestMethod = "GET"
                 connection.connectTimeout = 5000
 
+                // ✅ FIX 403: Add User-Agent header to satisfy GitHub API
+                connection.setRequestProperty("User-Agent", "LinkifyAll-App")
+                connection.setRequestProperty("Accept", "application/vnd.github.v3+json")
+
                 if (connection.responseCode == 200) {
                     val response = connection.inputStream.bufferedReader().use { it.readText() }
-
-                    // The result is a List (JSONArray)
                     val releases = JSONArray(response)
 
                     if (releases.length() > 0) {
-                        // ✅ Get index 0: This is strictly the latest release uploaded to GitHub
                         val json = releases.getJSONObject(0)
-
                         var latestVersion = json.optString("tag_name", "").replace("v", "", true)
 
                         val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
                         val currentVersion = pInfo.versionName ?: "1.0"
 
-                        // Compare logic: If the latest uploaded version is newer than current, notify user
                         if (latestVersion.isNotEmpty() && isNewer(currentVersion, latestVersion)) {
 
                             val assets = json.getJSONArray("assets")
@@ -63,10 +62,8 @@ object UpdateChecker {
                             }
                             if (downloadUrl.isEmpty()) downloadUrl = json.getString("html_url")
 
-                            // Check for pre-release tag
                             val isPrerelease = json.optBoolean("prerelease", false)
                             var body = json.optString("body", "New update available!")
-
                             if (isPrerelease) {
                                 body = "⚠️ [Pre-release]\n$body"
                             }
@@ -80,6 +77,9 @@ object UpdateChecker {
                     } else {
                         withContext(Dispatchers.Main) { listener.onNoUpdate() }
                     }
+                } else if (connection.responseCode == 403) {
+                    // Handle Rate Limit specifically
+                    withContext(Dispatchers.Main) { listener.onError("Rate Limit Exceeded (Try later)") }
                 } else {
                     withContext(Dispatchers.Main) { listener.onError("Connection Failed: ${connection.responseCode}") }
                 }

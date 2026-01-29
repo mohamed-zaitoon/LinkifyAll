@@ -1,7 +1,7 @@
 [versions]
 # App Versions
-versionCode = "104"
-versionName = "1.0"
+versionCode = "105"
+versionName = "1.0-rc4"
 coroutines = "1.10.2"
 coreKtx = "1.17.0"
 swipeRefresh = "1.2.0" # 👈 أضف هذا السطر
