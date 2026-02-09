@@ -7,9 +7,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
@@ -46,6 +46,8 @@ object UpdateChecker {
         fun onConfigFetched(result: ConfigResult)
         fun onError(error: String)
     }
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     fun checkForUpdate(context: Context, listener: UpdateListener) {
         val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
@@ -128,9 +130,8 @@ object UpdateChecker {
     }
 
     // دالة لجلب رابط الـ APK من GitHub API
-    @OptIn(DelicateCoroutinesApi::class)
     private fun fetchDynamicUrlFromGitHub(callback: (String?, String?) -> Unit) {
-        GlobalScope.launch(Dispatchers.IO) {
+        scope.launch {
             try {
                 val url = URL(GITHUB_API_URL)
                 val connection = url.openConnection() as HttpURLConnection

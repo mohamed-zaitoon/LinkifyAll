@@ -23,6 +23,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.core.content.FileProvider
 import java.io.File
 import com.google.firebase.FirebaseApp // 👈 ضيف دي
 class MainActivity : Activity() {
@@ -33,6 +34,7 @@ class MainActivity : Activity() {
 
     private var downloadId: Long = -1
     private var downloadFileName: String = ""
+    private var downloadedFile: File? = null
 
     // Dialog Components
     private var progressDialog: AlertDialog? = null
@@ -239,14 +241,16 @@ class MainActivity : Activity() {
                 }
             }
             downloadFileName = "LinkifyAll_$version.apk"
-            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
-            if (file.exists()) file.delete()
+            val downloadsDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            if (downloadsDir != null && !downloadsDir.exists()) downloadsDir.mkdirs()
+            downloadedFile = downloadsDir?.let { File(it, downloadFileName) }
+            downloadedFile?.let { if (it.exists()) it.delete() }
 
             val request = DownloadManager.Request(Uri.parse(url))
                 .setTitle("Downloading LinkifyAll $version")
                 .setDescription("Downloading update...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, downloadFileName)
+                .setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, downloadFileName)
                 .setMimeType("application/vnd.android.package-archive")
 
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
@@ -363,8 +367,8 @@ class MainActivity : Activity() {
     }
 
     private fun handleInstallation(downloadId: Long) {
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), downloadFileName)
-        if (file.exists()) {
+        val file = downloadedFile
+        if (file != null && file.exists()) {
             Toast.makeText(this, "Installing via Root...", Toast.LENGTH_SHORT).show()
             val success = installWithRoot(file.absolutePath)
             if (success) return
@@ -386,12 +390,18 @@ class MainActivity : Activity() {
         try {
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             val uri = manager.getUriForDownloadedFile(downloadId)
+                ?: downloadedFile?.let {
+                    FileProvider.getUriForFile(this, "$packageName.provider", it)
+                }
             if (uri != null) {
-                val installIntent = Intent(Intent.ACTION_VIEW)
-                installIntent.setDataAndType(uri, "application/vnd.android.package-archive")
-                installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val installIntent = Intent(Intent.ACTION_VIEW).apply {
+                    setDataAndType(uri, "application/vnd.android.package-archive")
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
                 startActivity(installIntent)
+            } else {
+                Toast.makeText(this, "Install Failed: file missing", Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
             Toast.makeText(this, "Install Failed: ${e.message}", Toast.LENGTH_SHORT).show()
