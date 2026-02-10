@@ -85,3 +85,5 @@ lint/tmp/
 version.properties
 *.py
 *.jar
+# Keep Gradle wrapper JAR tracked
+!gradle/wrapper/gradle-wrapper.jar
