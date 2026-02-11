@@ -1,9 +1,10 @@
 import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.kotlin.dsl.configure
+import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     alias(libs.plugins.android.application)
-    // 👇 Apply Google Services Plugin
     alias(libs.plugins.google.services)
 }
 
@@ -19,6 +20,29 @@ configure<ApplicationExtension> {
         versionName = libs.versions.versionName.get()
     }
 
+    // 👇 1. تحميل ملف keystore.properties
+    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    val keystoreProperties = Properties()
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    }
+
+    // 👇 2. إعداد التوقيع (Signing Config)
+    signingConfigs {
+        create("release") {
+            // Support both camelCase and snake_case keys so local files stay flexible
+            val alias = (keystoreProperties["keyAlias"] ?: keystoreProperties["key_alias"]) as String?
+            val keyPass = (keystoreProperties["keyPassword"] ?: keystoreProperties["key_password"]) as String?
+            val storePath = (keystoreProperties["storeFile"] ?: keystoreProperties["store_file"]) as String?
+            val storePass = (keystoreProperties["storePassword"] ?: keystoreProperties["store_password"]) as String?
+
+            keyAlias = alias
+            keyPassword = keyPass
+            storeFile = storePath?.let { file(it) }
+            storePassword = storePass
+        }
+    }
+
     buildFeatures {
         viewBinding = true
     }
@@ -28,23 +52,17 @@ configure<ApplicationExtension> {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // Build Types Configuration
     buildTypes {
         getByName("release") {
-            // Enable code shrinking and obfuscation (ProGuard/R8)
             isMinifyEnabled = true
-
-            // Enable resource shrinking to remove unused resources
             isShrinkResources = true
-
-            // ProGuard rules files
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
 
-            // Use debug keys for signing (For testing)
-            signingConfig = signingConfigs.getByName("debug")
+            // 👇 3. استخدام التوقيع الحقيقي هنا بدلاً من debug
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
@@ -58,7 +76,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.swiperefreshlayout)
 
-    // 👇 Firebase Dependencies (Using BOM for version management)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.config)
     implementation(libs.firebase.analytics)

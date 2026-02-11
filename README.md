@@ -3,7 +3,7 @@
 ### Turn Text into Action. System-Wide.
 
 [![GitHub release](https://img.shields.io/github/v/release/mohamed-zaitoon/LinkifyAll?style=for-the-badge&logo=github&color=2ea44f)](https://github.com/mohamed-zaitoon/LinkifyAll/releases)
-[![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
+[![Android](https://img.shields.io/badge/Android-10.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![Root](https://img.shields.io/badge/Root-Required-red?style=for-the-badge)](https://github.com/topjohnwu/Magisk)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.3.10-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![Xposed](https://img.shields.io/badge/Xposed-Module-orange?style=for-the-badge&logo=xposed&logoColor=white)](https://repo.xposed.info/)
