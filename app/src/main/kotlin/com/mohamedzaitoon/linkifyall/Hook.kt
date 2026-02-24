@@ -67,7 +67,7 @@ class Hook : IXposedHookLoadPackage {
                             matcher.reset()
                             while (matcher.find()) {
                                 modified = true
-                                spannable.setSpan(ForegroundColorSpan(Color.CYAN), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                spannable.setSpan(ForegroundColorSpan(Color.parseColor("#2196F3")), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                             }
 
                             if (modified) {

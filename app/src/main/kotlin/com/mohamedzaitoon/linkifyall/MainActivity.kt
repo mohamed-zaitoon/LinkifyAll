@@ -47,6 +47,13 @@ class MainActivity : Activity() {
     private lateinit var updateButton: Button
     private lateinit var githubButton: TextView
     private lateinit var websiteButton: TextView
+    private val suCandidates = listOf(
+        "/product/bin/su",
+        "/system/bin/su",
+        "/system/xbin/su",
+        "/sbin/su",
+        "su"
+    )
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,6 +119,19 @@ class MainActivity : Activity() {
         }
         cardLayout.addView(statusBadge)
 
+        val moduleManagerButton = Button(this).apply {
+            text = if (isActive) "Open Module Manager" else "Enable Module (Open Manager)"
+            setTextColor(Color.WHITE)
+            textSize = 15f
+            typeface = Typeface.DEFAULT_BOLD
+            background = getRoundedButtonDrawable("#FF9800")
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 130
+            ).apply { setMargins(20, 0, 20, 30) }
+            setOnClickListener { openModuleManager() }
+        }
+        cardLayout.addView(moduleManagerButton)
+
         val versionInfo = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (e: Exception) { "?" }
         val versionView = TextView(this).apply {
             text = "Version $versionInfo"
@@ -149,7 +169,7 @@ class MainActivity : Activity() {
             val tv = TextView(this).apply {
                 text = "$emoji $label"
                 textSize = 14f
-                setTextColor(Color.parseColor("#1976D2"))
+                setTextColor(Color.parseColor("#2196F3"))
                 setPadding(30, 20, 30, 20)
                 gravity = Gravity.CENTER
                 setOnClickListener { openUrl(initialUrl) }
@@ -176,6 +196,8 @@ class MainActivity : Activity() {
         scrollView.addView(rootLayout)
         swipeRefreshLayout.addView(scrollView)
         setContentView(swipeRefreshLayout)
+
+        requestRootAccessAsync()
 
         swipeRefreshLayout.setOnRefreshListener { checkForUpdates() }
         checkForUpdates()
@@ -377,13 +399,7 @@ class MainActivity : Activity() {
     }
 
     private fun installWithRoot(path: String): Boolean {
-        return try {
-            val command = "pm install -r \"$path\""
-            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
-            process.waitFor() == 0
-        } catch (e: Exception) {
-            false
-        }
+        return runWithRoot("pm install -r \"$path\"")
     }
 
     private fun installStandard(downloadId: Long) {
@@ -416,6 +432,86 @@ class MainActivity : Activity() {
 
     private fun openUrl(url: String) {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch (e: Exception) {}
+    }
+
+    private fun openModuleManager() {
+        val managerPackages = listOf(
+            "org.lsposed.manager",
+            "de.robv.android.xposed.installer",
+            "org.meowcat.edxposed.manager"
+        )
+
+        for (managerPackage in managerPackages) {
+            try {
+                val launchIntent = packageManager.getLaunchIntentForPackage(managerPackage)
+                if (launchIntent != null) {
+                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(launchIntent)
+                    if (!isModuleActive()) {
+                        Toast.makeText(this, "Enable LinkifyAll module, then reboot", Toast.LENGTH_LONG).show()
+                    }
+                    return
+                }
+            } catch (_: Exception) {
+            }
+        }
+
+        Thread {
+            if (!requestRootAccess()) {
+                runOnUiThread {
+                    Toast.makeText(this, "Root denied. Allow root in Magisk, then retry.", Toast.LENGTH_LONG).show()
+                }
+                return@Thread
+            }
+
+            val opened = openModuleManagerViaShell()
+            runOnUiThread {
+                if (opened) {
+                    if (!isModuleActive()) {
+                        Toast.makeText(this, "Enable LinkifyAll module, then reboot", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(this, "No LSPosed/Xposed manager app found", Toast.LENGTH_LONG).show()
+                }
+            }
+        }.start()
+    }
+
+    private fun openModuleManagerViaShell(): Boolean {
+        val shellCommands = listOf(
+            "am start -c org.lsposed.manager.LAUNCH_MANAGER com.android.shell/.BugreportWarningActivity",
+            "for script in /data/adb/modules/*lsposed*/action.sh /data/adb/modules/*xposed*/action.sh /data/adb/modules/*posed*/action.sh; do [ -f \"${'$'}script\" ] && sh \"${'$'}script\" && exit 0; done; exit 1"
+        )
+
+        for (command in shellCommands) {
+            if (runWithRoot(command)) return true
+        }
+        return false
+    }
+
+    private fun requestRootAccessAsync() {
+        Thread {
+            if (!requestRootAccess()) {
+                runOnUiThread {
+                    Toast.makeText(this, "Grant root permission from Magisk for full features.", Toast.LENGTH_LONG).show()
+                }
+            }
+        }.start()
+    }
+
+    private fun requestRootAccess(): Boolean {
+        return runWithRoot("id")
+    }
+
+    private fun runWithRoot(command: String): Boolean {
+        for (suPath in suCandidates) {
+            try {
+                val process = Runtime.getRuntime().exec(arrayOf(suPath, "-c", command))
+                if (process.waitFor() == 0) return true
+            } catch (_: Exception) {
+            }
+        }
+        return false
     }
 
     private fun isModuleActive(): Boolean = false
