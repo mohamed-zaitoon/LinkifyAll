@@ -52,6 +52,7 @@ captures/
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
 .jks
+*.jks
 *.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
@@ -90,3 +91,5 @@ version.properties
 !gradle/wrapper/gradle-wrapper.jar
 # Local signing keys
 /keystore.properties
+/key.properties
+/app/*.jks

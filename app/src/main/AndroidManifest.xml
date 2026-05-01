@@ -1,13 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     >
-
-    <queries>
-        <package android:name="org.lsposed.manager" />
-        <package android:name="de.robv.android.xposed.installer" />
-        <package android:name="org.meowcat.edxposed.manager" />
-    </queries>
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
@@ -37,7 +30,7 @@
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -46,6 +39,19 @@
                 <data android:scheme="linkifyall" android:host="open" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".LauncherActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="LinkifyAll"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <provider
             android:name="androidx.core.content.FileProvider"

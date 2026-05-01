@@ -20,10 +20,13 @@ configure<ApplicationExtension> {
         versionName = libs.versions.versionName.get()
     }
 
-    // 👇 1. تحميل ملف keystore.properties
-    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    // 👇 1. تحميل ملف إعدادات التوقيع
+    val keystorePropertiesFile = listOf(
+        rootProject.file("keystore.properties"),
+        rootProject.file("key.properties")
+    ).firstOrNull { it.exists() }
     val keystoreProperties = Properties()
-    if (keystorePropertiesFile.exists()) {
+    if (keystorePropertiesFile != null) {
         keystoreProperties.load(FileInputStream(keystorePropertiesFile))
     }
 
@@ -72,6 +75,7 @@ dependencies {
         "dir" to "libs",
         "include" to listOf("*.jar")
     )))
+    compileOnly(libs.xposed.api)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.swiperefreshlayout)

@@ -5,9 +5,11 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Color
 import android.graphics.Typeface
@@ -58,6 +60,7 @@ class MainActivity : Activity() {
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ensureLauncherIconHidden()
         FirebaseApp.initializeApp(this)
         // 1. SwipeRefreshLayout
         swipeRefreshLayout = SwipeRefreshLayout(this).apply {
@@ -118,19 +121,6 @@ class MainActivity : Activity() {
             ).apply { setMargins(0, 30, 0, 50) }
         }
         cardLayout.addView(statusBadge)
-
-        val moduleManagerButton = Button(this).apply {
-            text = if (isActive) "Open Module Manager" else "Enable Module (Open Manager)"
-            setTextColor(Color.WHITE)
-            textSize = 15f
-            typeface = Typeface.DEFAULT_BOLD
-            background = getRoundedButtonDrawable("#FF9800")
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 130
-            ).apply { setMargins(20, 0, 20, 30) }
-            setOnClickListener { openModuleManager() }
-        }
-        cardLayout.addView(moduleManagerButton)
 
         val versionInfo = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (e: Exception) { "?" }
         val versionView = TextView(this).apply {
@@ -207,6 +197,14 @@ class MainActivity : Activity() {
         } else {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
+    }
+
+    private fun ensureLauncherIconHidden() {
+        packageManager.setComponentEnabledSetting(
+            ComponentName(this, "$packageName.LauncherActivity"),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     private fun checkForUpdates() {
@@ -432,61 +430,6 @@ class MainActivity : Activity() {
 
     private fun openUrl(url: String) {
         try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch (e: Exception) {}
-    }
-
-    private fun openModuleManager() {
-        val managerPackages = listOf(
-            "org.lsposed.manager",
-            "de.robv.android.xposed.installer",
-            "org.meowcat.edxposed.manager"
-        )
-
-        for (managerPackage in managerPackages) {
-            try {
-                val launchIntent = packageManager.getLaunchIntentForPackage(managerPackage)
-                if (launchIntent != null) {
-                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(launchIntent)
-                    if (!isModuleActive()) {
-                        Toast.makeText(this, "Enable LinkifyAll module, then reboot", Toast.LENGTH_LONG).show()
-                    }
-                    return
-                }
-            } catch (_: Exception) {
-            }
-        }
-
-        Thread {
-            if (!requestRootAccess()) {
-                runOnUiThread {
-                    Toast.makeText(this, "Root denied. Allow root in Magisk, then retry.", Toast.LENGTH_LONG).show()
-                }
-                return@Thread
-            }
-
-            val opened = openModuleManagerViaShell()
-            runOnUiThread {
-                if (opened) {
-                    if (!isModuleActive()) {
-                        Toast.makeText(this, "Enable LinkifyAll module, then reboot", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this, "No LSPosed/Xposed manager app found", Toast.LENGTH_LONG).show()
-                }
-            }
-        }.start()
-    }
-
-    private fun openModuleManagerViaShell(): Boolean {
-        val shellCommands = listOf(
-            "am start -c org.lsposed.manager.LAUNCH_MANAGER com.android.shell/.BugreportWarningActivity",
-            "for script in /data/adb/modules/*lsposed*/action.sh /data/adb/modules/*xposed*/action.sh /data/adb/modules/*posed*/action.sh; do [ -f \"${'$'}script\" ] && sh \"${'$'}script\" && exit 0; done; exit 1"
-        )
-
-        for (command in shellCommands) {
-            if (runWithRoot(command)) return true
-        }
-        return false
     }
 
     private fun requestRootAccessAsync() {
