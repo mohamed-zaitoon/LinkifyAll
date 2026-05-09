@@ -1,7 +1,7 @@
 # --- Basic Settings ---
 # Keep line numbers and source file names (Crucial for debugging crashes)
 -keepattributes SourceFile,LineNumberTable
--renamesourcefileattribute SourceFile
+-renamesourcefileattribute linkifyall
 
 # --- Kotlin Settings ---
 # Prevent obfuscation of Kotlin metadata (Essential for Coroutines)
