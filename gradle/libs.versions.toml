@@ -1,13 +1,13 @@
 [versions]
 # App Versions
-versionCode = "233"
-versionName = "0.4.0-beta01"
+versionCode = "240"
+versionName = "0.4.0"
 coroutines = "1.11.0"
-coreKtx = "1.19.0-alpha02"
+coreKtx = "1.19.0"
 swipeRefresh = "1.2.0"
 # 👇 Firebase Versions
-googleServices = "4.4.4"
-firebaseBom = "34.13.0"
+googleServices = "4.5.0"
+firebaseBom = "34.15.0"
 xposedApi = "82"
 
 # SDK Versions
@@ -17,8 +17,8 @@ minSdk = "30"
 targetSdk = "37"
 
 # Plugins
-agp = "9.2.1"
-kotlin = "2.4.0-Beta2"
+agp = "9.4.0-alpha02"
+kotlin = "2.4.20-Beta1"
 
 [libraries]
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
