@@ -1,7 +1,7 @@
 [versions]
 # App Versions
-versionCode = "240"
-versionName = "0.4.0"
+versionCode = "241"
+versionName = "0.5.0-alpha01"
 coroutines = "1.11.0"
 coreKtx = "1.19.0"
 swipeRefresh = "1.2.0"
@@ -17,7 +17,7 @@ minSdk = "30"
 targetSdk = "37"
 
 # Plugins
-agp = "9.4.0-alpha02"
+agp = "9.4.0-alpha03"
 kotlin = "2.4.20-Beta1"
 
 [libraries]
