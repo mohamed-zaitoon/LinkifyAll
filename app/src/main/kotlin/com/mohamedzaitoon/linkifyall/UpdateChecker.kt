@@ -2,7 +2,6 @@ package com.mohamedzaitoon.linkifyall
 
 import android.content.Context
 import android.content.pm.PackageInfo
-import android.os.Build
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
@@ -23,6 +22,8 @@ object UpdateChecker {
     private const val GITHUB_REPO = "LinkifyAll"
     // API لجلب آخر إصدار (الأحدث زمنياً)
     private const val GITHUB_API_URL = "https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/releases?per_page=1"
+    private const val DEFAULT_GITHUB_URL = "https://github.com/$GITHUB_USER/$GITHUB_REPO"
+    private const val DEFAULT_WEBSITE_URL = "https://linkifyall.mohamedzaitoon.com"
 
     // --- Firebase Keys ---
     private const val KEY_LATEST_VERSION_CODE = "latest_version_code"
@@ -52,8 +53,7 @@ object UpdateChecker {
     fun checkForUpdate(context: Context, listener: UpdateListener) {
         val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
 
-        // تحديث فوري (للإنتاج اجعله 3600)
-        val configSettings = remoteConfigSettings { minimumFetchIntervalInSeconds = 0 }
+        val configSettings = remoteConfigSettings { minimumFetchIntervalInSeconds = 3600 }
         remoteConfig.setConfigSettingsAsync(configSettings)
 
         // القيم الافتراضية
@@ -61,8 +61,8 @@ object UpdateChecker {
             KEY_LATEST_VERSION_CODE to 0,
             KEY_LATEST_VERSION_NAME to "",
             KEY_UPDATE_URL to "AUTO", // الافتراضي هو البحث التلقائي
-            KEY_GITHUB_URL to "",
-            KEY_WEBSITE_URL to ""
+            KEY_GITHUB_URL to DEFAULT_GITHUB_URL,
+            KEY_WEBSITE_URL to DEFAULT_WEBSITE_URL
         )
         remoteConfig.setDefaultsAsync(defaults)
 
@@ -82,12 +82,12 @@ object UpdateChecker {
     ) {
         try {
             // 1. جلب البيانات الأساسية من Firebase
-            val githubUrl = remoteConfig.getString(KEY_GITHUB_URL)
-            val websiteUrl = remoteConfig.getString(KEY_WEBSITE_URL)
+            val githubUrl = remoteConfig.getString(KEY_GITHUB_URL).ifBlank { DEFAULT_GITHUB_URL }
+            val websiteUrl = remoteConfig.getString(KEY_WEBSITE_URL).ifBlank { DEFAULT_WEBSITE_URL }
 
             val latestCode = remoteConfig.getLong(KEY_LATEST_VERSION_CODE)
-            val latestName = remoteConfig.getString(KEY_LATEST_VERSION_NAME)
-            val firebaseUpdateUrl = remoteConfig.getString(KEY_UPDATE_URL)
+            val latestName = remoteConfig.getString(KEY_LATEST_VERSION_NAME).ifBlank { "new version" }
+            val firebaseUpdateUrl = remoteConfig.getString(KEY_UPDATE_URL).trim()
             val notes = remoteConfig.getString(KEY_RELEASE_NOTES)
 
             // 2. التحقق من الإصدار
@@ -111,10 +111,14 @@ object UpdateChecker {
                             )
                         }
                     }
-                } else {
+                } else if (firebaseUpdateUrl.isNotBlank()) {
                     // الرابط مباشر من Firebase
                     listener.onConfigFetched(
                         ConfigResult(githubUrl, websiteUrl, true, latestName, firebaseUpdateUrl, notes)
+                    )
+                } else {
+                    listener.onConfigFetched(
+                        ConfigResult(githubUrl, websiteUrl, true, latestName, githubUrl, "$notes\n(Download from GitHub Page)")
                     )
                 }
             } else {
@@ -137,39 +141,44 @@ object UpdateChecker {
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connectTimeout = 5000
+                connection.readTimeout = 5000
 
                 // Headers لتجنب الحظر
                 connection.setRequestProperty("User-Agent", "LinkifyAll-App")
                 connection.setRequestProperty("Accept", "application/vnd.github.v3+json")
 
-                if (connection.responseCode == 200) {
-                    val response = connection.inputStream.bufferedReader().use { it.readText() }
-                    val releases = JSONArray(response)
+                try {
+                    if (connection.responseCode == 200) {
+                        val response = connection.inputStream.bufferedReader().use { it.readText() }
+                        val releases = JSONArray(response)
 
-                    if (releases.length() > 0) {
-                        val latestJson = releases.getJSONObject(0)
-                        val assets = latestJson.getJSONArray("assets")
+                        if (releases.length() > 0) {
+                            val latestJson = releases.getJSONObject(0)
+                            val assets = latestJson.getJSONArray("assets")
 
-                        var apkUrl = ""
-                        // البحث عن أول ملف ينتهي بـ .apk
-                        for (i in 0 until assets.length()) {
-                            val asset = assets.getJSONObject(i)
-                            if (asset.getString("name").endsWith(".apk")) {
-                                apkUrl = asset.getString("browser_download_url")
-                                break
+                            var apkUrl = ""
+                            // البحث عن أول ملف ينتهي بـ .apk
+                            for (i in 0 until assets.length()) {
+                                val asset = assets.getJSONObject(i)
+                                if (asset.getString("name").endsWith(".apk")) {
+                                    apkUrl = asset.getString("browser_download_url")
+                                    break
+                                }
                             }
-                        }
 
-                        // العودة بالنتيجة للـ Main Thread
-                        withContext(Dispatchers.Main) {
-                            if (apkUrl.isNotEmpty()) callback(apkUrl, null)
-                            else callback(null, "No APK found in release")
+                            // العودة بالنتيجة للـ Main Thread
+                            withContext(Dispatchers.Main) {
+                                if (apkUrl.isNotEmpty()) callback(apkUrl, null)
+                                else callback(null, "No APK found in release")
+                            }
+                        } else {
+                            withContext(Dispatchers.Main) { callback(null, "No releases found") }
                         }
                     } else {
-                        withContext(Dispatchers.Main) { callback(null, "No releases found") }
+                        withContext(Dispatchers.Main) { callback(null, "GitHub Error: ${connection.responseCode}") }
                     }
-                } else {
-                    withContext(Dispatchers.Main) { callback(null, "GitHub Error: ${connection.responseCode}") }
+                } finally {
+                    connection.disconnect()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) { callback(null, e.message) }
@@ -180,12 +189,7 @@ object UpdateChecker {
     private fun getAppVersionCode(context: Context): Long {
         return try {
             val pInfo: PackageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                pInfo.longVersionCode
-            } else {
-                @Suppress("DEPRECATION")
-                pInfo.versionCode.toLong()
-            }
+            pInfo.longVersionCode
         } catch (e: Exception) { -1L }
     }
 }

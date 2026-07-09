@@ -2,7 +2,7 @@
 
 ### Turn Text into Action. System-Wide.
 
-[![Version](https://img.shields.io/badge/Version-0.5.0--alpha01-2ea44f?style=for-the-badge&logo=github)](https://github.com/mohamed-zaitoon/LinkifyAll/releases)
+[![Version](https://img.shields.io/badge/Version-0.5.0--alpha02-2ea44f?style=for-the-badge&logo=github)](https://github.com/mohamed-zaitoon/LinkifyAll/releases)
 [![Android](https://img.shields.io/badge/Android-11.0%2B%20(API%2030%2B)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![Target](https://img.shields.io/badge/Target-Android%2017%20(API%2037)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![Root](https://img.shields.io/badge/Root-Required-red?style=for-the-badge)](https://github.com/topjohnwu/Magisk)

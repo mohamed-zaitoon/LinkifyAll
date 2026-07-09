@@ -23,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TikTokCoinApp"
+rootProject.name = "LinkifyAll"
 include(":app")

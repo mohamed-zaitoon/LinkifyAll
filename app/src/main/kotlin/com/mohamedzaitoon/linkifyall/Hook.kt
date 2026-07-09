@@ -25,9 +25,12 @@ import java.util.regex.Pattern
 class Hook : IXposedHookLoadPackage {
 
     private val urlPattern = Pattern.compile(
-        "((?:http|https)://\\S+|www\\.\\S+|[a-zA-Z0-9.-]+\\.(?:com|net|org|io|gov|edu|me|xyz|info)\\S*)",
+        """(?<![A-Za-z0-9@._-])((?:[a-z][a-z0-9+.-]{1,20}://|www\.)[^\s<>"']+|(?:mailto:|tel:|sms:|geo:|magnet:\?)[^\s<>"']+|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}(?::\d{2,5})?(?:[/?#][^\s<>"']*)?|(?:\d{1,3}\.){3}\d{1,3}(?::\d{2,5})?(?:[/?#][^\s<>"']*)?)""",
         Pattern.CASE_INSENSITIVE
     )
+    private val uriSchemePattern = Pattern.compile("^[a-z][a-z0-9+.-]*:", Pattern.CASE_INSENSITIVE)
+    private val ipv4Pattern = Pattern.compile("""^(?:\d{1,3}\.){3}\d{1,3}(?::\d{2,5})?(?:[/?#].*)?$""")
+    private val linkColor = Color.parseColor("#2196F3")
     private var lastCustomViewOpenAt = 0L
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
@@ -64,7 +67,7 @@ class Hook : IXposedHookLoadPackage {
                         if (originalText.isEmpty() || originalText.length > 2000) return
 
                         val textStr = originalText.toString()
-                        if (!textStr.contains(".") && !textStr.contains("http")) return
+                        if (!mightContainUrl(textStr)) return
 
                         val matcher = urlPattern.matcher(textStr)
                         if (matcher.find()) {
@@ -73,8 +76,12 @@ class Hook : IXposedHookLoadPackage {
 
                             matcher.reset()
                             while (matcher.find()) {
+                                val start = matcher.start(1)
+                                val end = matcher.end(1)
+                                if (start < 0 || end <= start) continue
+
                                 modified = true
-                                spannable.setSpan(ForegroundColorSpan(Color.parseColor("#2196F3")), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                spannable.setSpan(ForegroundColorSpan(linkColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                             }
 
                             if (modified) {
@@ -118,8 +125,11 @@ class Hook : IXposedHookLoadPackage {
 
                                 val matcher = urlPattern.matcher(text.toString())
                                 while (matcher.find()) {
-                                    if (off >= matcher.start() && off <= matcher.end()) {
-                                        val url = cleanMatchedUrl(matcher.group())
+                                    val start = matcher.start(1)
+                                    val end = matcher.end(1)
+                                    if (off >= start && off < end) {
+                                        val rawUrl = matcher.group(1) ?: continue
+                                        val url = cleanMatchedUrl(rawUrl)
                                         openUrl(tv, url)
 
                                         param.setResult(true)
@@ -139,7 +149,9 @@ class Hook : IXposedHookLoadPackage {
 
                                 val matcher = urlPattern.matcher(text.toString())
                                 while (matcher.find()) {
-                                    if (off >= matcher.start() && off <= matcher.end()) {
+                                    val start = matcher.start(1)
+                                    val end = matcher.end(1)
+                                    if (off >= start && off < end) {
                                         tv.parent?.requestDisallowInterceptTouchEvent(true)
                                         param.setResult(true)
                                         return
@@ -188,6 +200,7 @@ class Hook : IXposedHookLoadPackage {
         )
     }
 
+    @Suppress("DEPRECATION")
     private fun findUrlFromAccessibilityAt(view: View, rawX: Int, rawY: Int): String? {
         val root = view.rootView?.createAccessibilityNodeInfo()
             ?: view.createAccessibilityNodeInfo()
@@ -203,6 +216,7 @@ class Hook : IXposedHookLoadPackage {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun findUrlInNode(node: AccessibilityNodeInfo, rawX: Int, rawY: Int, depth: Int): String? {
         if (depth > 40) return null
 
@@ -234,13 +248,15 @@ class Hook : IXposedHookLoadPackage {
             node.contentDescription?.let { append(it) }
         }
 
-        if (text.isBlank() || (!text.contains(".") && !text.contains("http", true))) return null
+        if (text.isBlank() || !mightContainUrl(text)) return null
         val matcher = urlPattern.matcher(text)
-        return if (matcher.find()) cleanMatchedUrl(matcher.group()) else null
+        return if (matcher.find()) matcher.group(1)?.let { cleanMatchedUrl(it) } else null
     }
 
     private fun openUrl(view: View, url: String) {
-        val finalUrl = if (url.startsWith("http", true)) url else "http://$url"
+        val finalUrl = normalizeUrl(url)
+        if (finalUrl.isBlank()) return
+
         val uri = Uri.parse(finalUrl)
         val sourcePackage = view.context.packageName
         val intent = Intent(Intent.ACTION_VIEW, uri).apply {
@@ -257,7 +273,27 @@ class Hook : IXposedHookLoadPackage {
     }
 
     private fun cleanMatchedUrl(url: String): String {
-        return url.trim().trimEnd('.', ',', ';', ':', '!', '?', ')', ']', '}')
+        return url.trim().trimEnd('.', ',', ';', ':', '!', '?', ')', ']', '}', '"', '\'')
+    }
+
+    private fun mightContainUrl(text: CharSequence): Boolean {
+        return text.contains(".") ||
+            text.contains("://") ||
+            text.contains("www", ignoreCase = true) ||
+            text.contains("mailto:", ignoreCase = true) ||
+            text.contains("tel:", ignoreCase = true) ||
+            text.contains("sms:", ignoreCase = true) ||
+            text.contains("geo:", ignoreCase = true) ||
+            text.contains("magnet:?", ignoreCase = true)
+    }
+
+    private fun normalizeUrl(url: String): String {
+        val cleaned = cleanMatchedUrl(url)
+        if (cleaned.isBlank()) return ""
+        if (uriSchemePattern.matcher(cleaned).find()) return cleaned
+
+        val prefix = if (ipv4Pattern.matcher(cleaned).matches()) "http://" else "https://"
+        return prefix + cleaned
     }
 
     private fun findExternalHandlerIntent(view: View, baseIntent: Intent, sourcePackage: String): Intent? {

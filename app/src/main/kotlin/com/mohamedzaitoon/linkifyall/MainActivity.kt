@@ -30,13 +30,19 @@ import java.io.File
 import com.google.firebase.FirebaseApp // 👈 ضيف دي
 class MainActivity : Activity() {
 
+    private companion object {
+        const val DEFAULT_GITHUB_URL = "https://github.com/mohamed-zaitoon/LinkifyAll"
+        const val DEFAULT_WEBSITE_URL = "https://linkifyall.mohamedzaitoon.com"
+    }
+
     // Default URLs
-    private var currentGithubUrl = ""
-    private var currentWebsiteUrl = ""
+    private var currentGithubUrl = DEFAULT_GITHUB_URL
+    private var currentWebsiteUrl = DEFAULT_WEBSITE_URL
 
     private var downloadId: Long = -1
     private var downloadFileName: String = ""
     private var downloadedFile: File? = null
+    private var installStarted = false
 
     // Dialog Components
     private var progressDialog: AlertDialog? = null
@@ -193,7 +199,7 @@ class MainActivity : Activity() {
         checkForUpdates()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_EXPORTED)
+            registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED)
         } else {
             registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
@@ -217,8 +223,8 @@ class MainActivity : Activity() {
                 swipeRefreshLayout.isRefreshing = false
 
                 // Update Links
-                currentGithubUrl = result.githubUrl
-                currentWebsiteUrl = result.websiteUrl
+                currentGithubUrl = result.githubUrl.ifBlank { DEFAULT_GITHUB_URL }
+                currentWebsiteUrl = result.websiteUrl.ifBlank { DEFAULT_WEBSITE_URL }
                 githubButton.setOnClickListener { openUrl(currentGithubUrl) }
                 websiteButton.setOnClickListener { openUrl(currentWebsiteUrl) }
 
@@ -251,22 +257,36 @@ class MainActivity : Activity() {
 
     private fun startInternalDownload(url: String, version: String) {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                if (!packageManager.canRequestPackageInstalls()) {
-                    startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
-                        data = Uri.parse("package:$packageName")
-                    })
-                    Toast.makeText(this, "Please allow permissions for fallback installation", Toast.LENGTH_LONG).show()
-                    return
-                }
+            val trimmedUrl = url.trim()
+            if (trimmedUrl.isBlank()) {
+                Toast.makeText(this, "Update link is not available yet.", Toast.LENGTH_LONG).show()
+                return
             }
-            downloadFileName = "LinkifyAll_$version.apk"
+
+            val downloadUri = Uri.parse(trimmedUrl)
+            val scheme = downloadUri.scheme?.lowercase()
+            if (scheme != "http" && scheme != "https") {
+                Toast.makeText(this, "Opening update page in browser.", Toast.LENGTH_SHORT).show()
+                openUrl(trimmedUrl)
+                return
+            }
+
+            if (!packageManager.canRequestPackageInstalls()) {
+                startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                    data = Uri.parse("package:$packageName")
+                })
+                Toast.makeText(this, "Please allow permissions for fallback installation", Toast.LENGTH_LONG).show()
+                return
+            }
+
+            installStarted = false
+            downloadFileName = "LinkifyAll_${safeFilePart(version)}.apk"
             val downloadsDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
             if (downloadsDir != null && !downloadsDir.exists()) downloadsDir.mkdirs()
             downloadedFile = downloadsDir?.let { File(it, downloadFileName) }
             downloadedFile?.let { if (it.exists()) it.delete() }
 
-            val request = DownloadManager.Request(Uri.parse(url))
+            val request = DownloadManager.Request(downloadUri)
                 .setTitle("Downloading LinkifyAll $version")
                 .setDescription("Downloading update...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
@@ -341,7 +361,7 @@ class MainActivity : Activity() {
                         if (status == DownloadManager.STATUS_SUCCESSFUL) {
                             isDownloading = false
                             progressDialog?.dismiss()
-                            // Receiver will handle install
+                            handleInstallation(downloadId)
                         } else if (status == DownloadManager.STATUS_FAILED) {
                             isDownloading = false
                             progressDialog?.dismiss()
@@ -387,6 +407,9 @@ class MainActivity : Activity() {
     }
 
     private fun handleInstallation(downloadId: Long) {
+        if (installStarted) return
+        installStarted = true
+
         val file = downloadedFile
         if (file != null && file.exists()) {
             Toast.makeText(this, "Installing via Root...", Toast.LENGTH_SHORT).show()
@@ -428,8 +451,23 @@ class MainActivity : Activity() {
         try { unregisterReceiver(onDownloadComplete) } catch (e: Exception) {}
     }
 
-    private fun openUrl(url: String) {
-        try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch (e: Exception) {}
+    private fun openUrl(url: String): Boolean {
+        val trimmedUrl = url.trim()
+        if (trimmedUrl.isBlank()) return false
+
+        return try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(trimmedUrl)))
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun safeFilePart(value: String): String {
+        return value.trim()
+            .ifBlank { "update" }
+            .replace(Regex("[^A-Za-z0-9._-]"), "_")
+            .take(80)
     }
 
     private fun requestRootAccessAsync() {
